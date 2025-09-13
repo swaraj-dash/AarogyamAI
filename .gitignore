@@ -1,22 +1,17 @@
-# Streamlit-specific
-.streamlit/secrets.toml
-
-# Python virtual environment
+# Virtual Environment
 venv/
+.venv/
 
 # Python cache
 __pycache__/
 *.pyc
 
-# Application-generated files
-uploads/
+# Streamlit Secrets - VERY IMPORTANT
+.streamlit/secrets.toml
+
+# Generated data and user uploads
 generated_reports/
+uploads/
 
-# Database files
-*.db
-*.sqlite3
-
-# IDE-specific
-.vscode/
-.idea/
-
+# Database file
+aarogyam.db

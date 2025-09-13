@@ -1,0 +1,433 @@
+state,meal type,preference,dish name,primary nutrient,secondary nutrient,tertiary nutrient,quaternary nutrient,description
+Andhra Pradesh,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Andhra Pradesh with flattened rice and peanuts.
+Andhra Pradesh,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Andhra Pradesh.
+Andhra Pradesh,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Andhra Pradesh.
+Andhra Pradesh,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Andhra Pradesh.
+Andhra Pradesh,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Andhra Pradesh.
+Andhra Pradesh,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Andhra Pradesh.
+Andhra Pradesh,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Andhra Pradesh.
+Andhra Pradesh,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Andhra Pradesh."
+Andhra Pradesh,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Andhra Pradesh.
+Andhra Pradesh,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Andhra Pradesh.
+Andhra Pradesh,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Andhra Pradesh.
+Andhra Pradesh,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Andhra Pradesh.
+Arunachal Pradesh,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Arunachal Pradesh with flattened rice and peanuts.
+Arunachal Pradesh,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Arunachal Pradesh.
+Arunachal Pradesh,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Arunachal Pradesh.
+Arunachal Pradesh,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Arunachal Pradesh.
+Arunachal Pradesh,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Arunachal Pradesh.
+Arunachal Pradesh,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Arunachal Pradesh.
+Arunachal Pradesh,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Arunachal Pradesh.
+Arunachal Pradesh,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Arunachal Pradesh."
+Arunachal Pradesh,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Arunachal Pradesh.
+Arunachal Pradesh,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Arunachal Pradesh.
+Arunachal Pradesh,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Arunachal Pradesh.
+Arunachal Pradesh,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Arunachal Pradesh.
+Assam,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Assam with flattened rice and peanuts.
+Assam,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Assam.
+Assam,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Assam.
+Assam,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Assam.
+Assam,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Assam.
+Assam,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Assam.
+Assam,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Assam.
+Assam,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Assam."
+Assam,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Assam.
+Assam,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Assam.
+Assam,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Assam.
+Assam,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Assam.
+Bihar,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Bihar with flattened rice and peanuts.
+Bihar,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Bihar.
+Bihar,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Bihar.
+Bihar,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Bihar.
+Bihar,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Bihar.
+Bihar,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Bihar.
+Bihar,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Bihar.
+Bihar,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Bihar."
+Bihar,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Bihar.
+Bihar,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Bihar.
+Bihar,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Bihar.
+Bihar,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Bihar.
+Chhattisgarh,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Chhattisgarh with flattened rice and peanuts.
+Chhattisgarh,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Chhattisgarh.
+Chhattisgarh,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Chhattisgarh.
+Chhattisgarh,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Chhattisgarh.
+Chhattisgarh,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Chhattisgarh.
+Chhattisgarh,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Chhattisgarh.
+Chhattisgarh,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Chhattisgarh.
+Chhattisgarh,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Chhattisgarh."
+Chhattisgarh,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Chhattisgarh.
+Chhattisgarh,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Chhattisgarh.
+Chhattisgarh,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Chhattisgarh.
+Chhattisgarh,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Chhattisgarh.
+Goa,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Goa with flattened rice and peanuts.
+Goa,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Goa.
+Goa,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Goa.
+Goa,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Goa.
+Goa,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Goa.
+Goa,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Goa.
+Goa,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Goa.
+Goa,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Goa."
+Goa,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Goa.
+Goa,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Goa.
+Goa,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Goa.
+Goa,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Goa.
+Gujarat,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Gujarat with flattened rice and peanuts.
+Gujarat,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Gujarat.
+Gujarat,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Gujarat.
+Gujarat,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Gujarat.
+Gujarat,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Gujarat.
+Gujarat,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Gujarat.
+Gujarat,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Gujarat.
+Gujarat,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Gujarat."
+Gujarat,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Gujarat.
+Gujarat,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Gujarat.
+Gujarat,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Gujarat.
+Gujarat,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Gujarat.
+Haryana,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Haryana with flattened rice and peanuts.
+Haryana,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Haryana.
+Haryana,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Haryana.
+Haryana,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Haryana.
+Haryana,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Haryana.
+Haryana,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Haryana.
+Haryana,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Haryana.
+Haryana,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Haryana."
+Haryana,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Haryana.
+Haryana,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Haryana.
+Haryana,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Haryana.
+Haryana,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Haryana.
+Himachal Pradesh,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Himachal Pradesh with flattened rice and peanuts.
+Himachal Pradesh,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Himachal Pradesh.
+Himachal Pradesh,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Himachal Pradesh.
+Himachal Pradesh,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Himachal Pradesh.
+Himachal Pradesh,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Himachal Pradesh.
+Himachal Pradesh,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Himachal Pradesh.
+Himachal Pradesh,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Himachal Pradesh.
+Himachal Pradesh,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Himachal Pradesh."
+Himachal Pradesh,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Himachal Pradesh.
+Himachal Pradesh,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Himachal Pradesh.
+Himachal Pradesh,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Himachal Pradesh.
+Himachal Pradesh,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Himachal Pradesh.
+Jharkhand,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Jharkhand with flattened rice and peanuts.
+Jharkhand,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Jharkhand.
+Jharkhand,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Jharkhand.
+Jharkhand,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Jharkhand.
+Jharkhand,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Jharkhand.
+Jharkhand,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Jharkhand.
+Jharkhand,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Jharkhand.
+Jharkhand,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Jharkhand."
+Jharkhand,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Jharkhand.
+Jharkhand,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Jharkhand.
+Jharkhand,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Jharkhand.
+Jharkhand,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Jharkhand.
+Karnataka,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Karnataka with flattened rice and peanuts.
+Karnataka,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Karnataka.
+Karnataka,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Karnataka.
+Karnataka,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Karnataka.
+Karnataka,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Karnataka.
+Karnataka,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Karnataka.
+Karnataka,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Karnataka.
+Karnataka,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Karnataka."
+Karnataka,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Karnataka.
+Karnataka,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Karnataka.
+Karnataka,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Karnataka.
+Karnataka,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Karnataka.
+Kerala,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Kerala with flattened rice and peanuts.
+Kerala,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Kerala.
+Kerala,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Kerala.
+Kerala,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Kerala.
+Kerala,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Kerala.
+Kerala,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Kerala.
+Kerala,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Kerala.
+Kerala,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Kerala."
+Kerala,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Kerala.
+Kerala,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Kerala.
+Kerala,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Kerala.
+Kerala,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Kerala.
+Madhya Pradesh,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Madhya Pradesh with flattened rice and peanuts.
+Madhya Pradesh,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Madhya Pradesh.
+Madhya Pradesh,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Madhya Pradesh.
+Madhya Pradesh,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Madhya Pradesh.
+Madhya Pradesh,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Madhya Pradesh.
+Madhya Pradesh,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Madhya Pradesh.
+Madhya Pradesh,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Madhya Pradesh.
+Madhya Pradesh,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Madhya Pradesh."
+Madhya Pradesh,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Madhya Pradesh.
+Madhya Pradesh,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Madhya Pradesh.
+Madhya Pradesh,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Madhya Pradesh.
+Madhya Pradesh,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Madhya Pradesh.
+Maharashtra,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Maharashtra with flattened rice and peanuts.
+Maharashtra,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Maharashtra.
+Maharashtra,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Maharashtra.
+Maharashtra,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Maharashtra.
+Maharashtra,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Maharashtra.
+Maharashtra,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Maharashtra.
+Maharashtra,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Maharashtra.
+Maharashtra,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Maharashtra."
+Maharashtra,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Maharashtra.
+Maharashtra,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Maharashtra.
+Maharashtra,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Maharashtra.
+Maharashtra,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Maharashtra.
+Manipur,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Manipur with flattened rice and peanuts.
+Manipur,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Manipur.
+Manipur,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Manipur.
+Manipur,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Manipur.
+Manipur,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Manipur.
+Manipur,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Manipur.
+Manipur,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Manipur.
+Manipur,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Manipur."
+Manipur,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Manipur.
+Manipur,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Manipur.
+Manipur,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Manipur.
+Manipur,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Manipur.
+Meghalaya,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Meghalaya with flattened rice and peanuts.
+Meghalaya,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Meghalaya.
+Meghalaya,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Meghalaya.
+Meghalaya,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Meghalaya.
+Meghalaya,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Meghalaya.
+Meghalaya,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Meghalaya.
+Meghalaya,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Meghalaya.
+Meghalaya,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Meghalaya."
+Meghalaya,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Meghalaya.
+Meghalaya,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Meghalaya.
+Meghalaya,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Meghalaya.
+Meghalaya,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Meghalaya.
+Mizoram,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Mizoram with flattened rice and peanuts.
+Mizoram,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Mizoram.
+Mizoram,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Mizoram.
+Mizoram,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Mizoram.
+Mizoram,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Mizoram.
+Mizoram,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Mizoram.
+Mizoram,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Mizoram.
+Mizoram,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Mizoram."
+Mizoram,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Mizoram.
+Mizoram,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Mizoram.
+Mizoram,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Mizoram.
+Mizoram,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Mizoram.
+Nagaland,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Nagaland with flattened rice and peanuts.
+Nagaland,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Nagaland.
+Nagaland,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Nagaland.
+Nagaland,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Nagaland.
+Nagaland,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Nagaland.
+Nagaland,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Nagaland.
+Nagaland,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Nagaland.
+Nagaland,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Nagaland."
+Nagaland,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Nagaland.
+Nagaland,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Nagaland.
+Nagaland,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Nagaland.
+Nagaland,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Nagaland.
+Odisha,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Odisha with flattened rice and peanuts.
+Odisha,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Odisha.
+Odisha,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Odisha.
+Odisha,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Odisha.
+Odisha,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Odisha.
+Odisha,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Odisha.
+Odisha,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Odisha.
+Odisha,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Odisha."
+Odisha,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Odisha.
+Odisha,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Odisha.
+Odisha,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Odisha.
+Odisha,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Odisha.
+Punjab,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Punjab with flattened rice and peanuts.
+Punjab,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Punjab.
+Punjab,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Punjab.
+Punjab,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Punjab.
+Punjab,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Punjab.
+Punjab,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Punjab.
+Punjab,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Punjab.
+Punjab,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Punjab."
+Punjab,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Punjab.
+Punjab,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Punjab.
+Punjab,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Punjab.
+Punjab,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Punjab.
+Rajasthan,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Rajasthan with flattened rice and peanuts.
+Rajasthan,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Rajasthan.
+Rajasthan,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Rajasthan.
+Rajasthan,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Rajasthan.
+Rajasthan,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Rajasthan.
+Rajasthan,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Rajasthan.
+Rajasthan,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Rajasthan.
+Rajasthan,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Rajasthan."
+Rajasthan,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Rajasthan.
+Rajasthan,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Rajasthan.
+Rajasthan,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Rajasthan.
+Rajasthan,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Rajasthan.
+Sikkim,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Sikkim with flattened rice and peanuts.
+Sikkim,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Sikkim.
+Sikkim,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Sikkim.
+Sikkim,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Sikkim.
+Sikkim,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Sikkim.
+Sikkim,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Sikkim.
+Sikkim,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Sikkim.
+Sikkim,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Sikkim."
+Sikkim,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Sikkim.
+Sikkim,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Sikkim.
+Sikkim,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Sikkim.
+Sikkim,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Sikkim.
+Tamil Nadu,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Tamil Nadu with flattened rice and peanuts.
+Tamil Nadu,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Tamil Nadu.
+Tamil Nadu,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Tamil Nadu.
+Tamil Nadu,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Tamil Nadu.
+Tamil Nadu,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Tamil Nadu.
+Tamil Nadu,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Tamil Nadu.
+Tamil Nadu,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Tamil Nadu.
+Tamil Nadu,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Tamil Nadu."
+Tamil Nadu,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Tamil Nadu.
+Tamil Nadu,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Tamil Nadu.
+Tamil Nadu,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Tamil Nadu.
+Tamil Nadu,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Tamil Nadu.
+Telangana,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Telangana with flattened rice and peanuts.
+Telangana,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Telangana.
+Telangana,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Telangana.
+Telangana,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Telangana.
+Telangana,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Telangana.
+Telangana,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Telangana.
+Telangana,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Telangana.
+Telangana,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Telangana."
+Telangana,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Telangana.
+Telangana,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Telangana.
+Telangana,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Telangana.
+Telangana,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Telangana.
+Tripura,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Tripura with flattened rice and peanuts.
+Tripura,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Tripura.
+Tripura,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Tripura.
+Tripura,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Tripura.
+Tripura,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Tripura.
+Tripura,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Tripura.
+Tripura,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Tripura.
+Tripura,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Tripura."
+Tripura,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Tripura.
+Tripura,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Tripura.
+Tripura,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Tripura.
+Tripura,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Tripura.
+Uttar Pradesh,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Uttar Pradesh with flattened rice and peanuts.
+Uttar Pradesh,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Uttar Pradesh.
+Uttar Pradesh,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Uttar Pradesh.
+Uttar Pradesh,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Uttar Pradesh.
+Uttar Pradesh,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Uttar Pradesh.
+Uttar Pradesh,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Uttar Pradesh.
+Uttar Pradesh,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Uttar Pradesh.
+Uttar Pradesh,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Uttar Pradesh."
+Uttar Pradesh,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Uttar Pradesh.
+Uttar Pradesh,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Uttar Pradesh.
+Uttar Pradesh,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Uttar Pradesh.
+Uttar Pradesh,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Uttar Pradesh.
+Uttarakhand,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Uttarakhand with flattened rice and peanuts.
+Uttarakhand,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Uttarakhand.
+Uttarakhand,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Uttarakhand.
+Uttarakhand,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Uttarakhand.
+Uttarakhand,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Uttarakhand.
+Uttarakhand,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Uttarakhand.
+Uttarakhand,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Uttarakhand.
+Uttarakhand,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Uttarakhand."
+Uttarakhand,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Uttarakhand.
+Uttarakhand,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Uttarakhand.
+Uttarakhand,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Uttarakhand.
+Uttarakhand,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Uttarakhand.
+West Bengal,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in West Bengal with flattened rice and peanuts.
+West Bengal,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in West Bengal.
+West Bengal,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in West Bengal.
+West Bengal,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in West Bengal.
+West Bengal,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in West Bengal.
+West Bengal,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in West Bengal.
+West Bengal,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in West Bengal.
+West Bengal,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in West Bengal."
+West Bengal,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in West Bengal.
+West Bengal,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in West Bengal.
+West Bengal,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in West Bengal.
+West Bengal,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from West Bengal.
+Andaman and Nicobar Islands,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Andaman and Nicobar Islands with flattened rice and peanuts.
+Andaman and Nicobar Islands,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Andaman and Nicobar Islands.
+Andaman and Nicobar Islands,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Andaman and Nicobar Islands.
+Andaman and Nicobar Islands,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Andaman and Nicobar Islands.
+Andaman and Nicobar Islands,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Andaman and Nicobar Islands.
+Andaman and Nicobar Islands,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Andaman and Nicobar Islands.
+Andaman and Nicobar Islands,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Andaman and Nicobar Islands.
+Andaman and Nicobar Islands,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Andaman and Nicobar Islands."
+Andaman and Nicobar Islands,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Andaman and Nicobar Islands.
+Andaman and Nicobar Islands,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Andaman and Nicobar Islands.
+Andaman and Nicobar Islands,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Andaman and Nicobar Islands.
+Andaman and Nicobar Islands,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Andaman and Nicobar Islands.
+Chandigarh,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Chandigarh with flattened rice and peanuts.
+Chandigarh,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Chandigarh.
+Chandigarh,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Chandigarh.
+Chandigarh,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Chandigarh.
+Chandigarh,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Chandigarh.
+Chandigarh,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Chandigarh.
+Chandigarh,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Chandigarh.
+Chandigarh,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Chandigarh."
+Chandigarh,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Chandigarh.
+Chandigarh,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Chandigarh.
+Chandigarh,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Chandigarh.
+Chandigarh,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Chandigarh.
+Dadra and Nagar Haveli and Daman and Diu,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Dadra and Nagar Haveli and Daman and Diu with flattened rice and peanuts.
+Dadra and Nagar Haveli and Daman and Diu,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Dadra and Nagar Haveli and Daman and Diu.
+Dadra and Nagar Haveli and Daman and Diu,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Dadra and Nagar Haveli and Daman and Diu.
+Dadra and Nagar Haveli and Daman and Diu,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Dadra and Nagar Haveli and Daman and Diu.
+Dadra and Nagar Haveli and Daman and Diu,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Dadra and Nagar Haveli and Daman and Diu.
+Dadra and Nagar Haveli and Daman and Diu,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Dadra and Nagar Haveli and Daman and Diu.
+Dadra and Nagar Haveli and Daman and Diu,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Dadra and Nagar Haveli and Daman and Diu.
+Dadra and Nagar Haveli and Daman and Diu,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Dadra and Nagar Haveli and Daman and Diu."
+Dadra and Nagar Haveli and Daman and Diu,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Dadra and Nagar Haveli and Daman and Diu.
+Dadra and Nagar Haveli and Daman and Diu,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Dadra and Nagar Haveli and Daman and Diu.
+Dadra and Nagar Haveli and Daman and Diu,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Dadra and Nagar Haveli and Daman and Diu.
+Dadra and Nagar Haveli and Daman and Diu,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Dadra and Nagar Haveli and Daman and Diu.
+Delhi,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Delhi with flattened rice and peanuts.
+Delhi,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Delhi.
+Delhi,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Delhi.
+Delhi,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Delhi.
+Delhi,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Delhi.
+Delhi,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Delhi.
+Delhi,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Delhi.
+Delhi,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Delhi."
+Delhi,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Delhi.
+Delhi,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Delhi.
+Delhi,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Delhi.
+Delhi,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Delhi.
+Jammu and Kashmir,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Jammu and Kashmir with flattened rice and peanuts.
+Jammu and Kashmir,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Jammu and Kashmir.
+Jammu and Kashmir,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Jammu and Kashmir.
+Jammu and Kashmir,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Jammu and Kashmir.
+Jammu and Kashmir,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Jammu and Kashmir.
+Jammu and Kashmir,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Jammu and Kashmir.
+Jammu and Kashmir,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Jammu and Kashmir.
+Jammu and Kashmir,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Jammu and Kashmir."
+Jammu and Kashmir,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Jammu and Kashmir.
+Jammu and Kashmir,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Jammu and Kashmir.
+Jammu and Kashmir,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Jammu and Kashmir.
+Jammu and Kashmir,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Jammu and Kashmir.
+Ladakh,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Ladakh with flattened rice and peanuts.
+Ladakh,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Ladakh.
+Ladakh,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Ladakh.
+Ladakh,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Ladakh.
+Ladakh,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Ladakh.
+Ladakh,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Ladakh.
+Ladakh,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Ladakh.
+Ladakh,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Ladakh."
+Ladakh,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Ladakh.
+Ladakh,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Ladakh.
+Ladakh,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Ladakh.
+Ladakh,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Ladakh.
+Lakshadweep,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Lakshadweep with flattened rice and peanuts.
+Lakshadweep,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Lakshadweep.
+Lakshadweep,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Lakshadweep.
+Lakshadweep,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Lakshadweep.
+Lakshadweep,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Lakshadweep.
+Lakshadweep,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Lakshadweep.
+Lakshadweep,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Lakshadweep.
+Lakshadweep,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Lakshadweep."
+Lakshadweep,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Lakshadweep.
+Lakshadweep,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Lakshadweep.
+Lakshadweep,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Lakshadweep.
+Lakshadweep,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Lakshadweep.
+Puducherry,Breakfast and Snack,Veg,Poha,Carbohydrates (flattened rice),Iron (peanuts),Vitamin C (onions & lemon),,Popular breakfast in Puducherry with flattened rice and peanuts.
+Puducherry,Breakfast and Snack,Veg,Upma,Carbohydrates (semolina),Fiber (vegetables),Protein (urad dal),,Savory semolina porridge common in Puducherry.
+Puducherry,Breakfast and Snack,Veg,Idli Sambar,Protein (urad dal),Carbohydrates (rice),Vitamin A (carrots),Vitamin C (tomatoes),Steamed rice cakes with sambar in Puducherry.
+Puducherry,Breakfast and Snack,Veg,Paratha,Carbohydrates (wheat flour),Iron (spinach/potato filling),Fiber (vegetables),,Stuffed flatbread often eaten in Puducherry.
+Puducherry,Breakfast and Snack,Non-Veg,Egg Bhurji,Protein (eggs),Vitamin B12 (eggs),Iron (onions),Vitamin C (tomatoes),Spicy scrambled eggs with pav in Puducherry.
+Puducherry,Breakfast and Snack,Non-Veg,Chicken Cutlet,Protein (chicken),Carbohydrates (bread crumbs),Iron (chicken),,Fried chicken patties served in Puducherry.
+Puducherry,Lunch and Dinner,Veg,Dal Tadka,Protein (toor dal),Iron (lentils),Fiber (tomatoes),Vitamin C (lemon),Yellow lentil curry staple in Puducherry.
+Puducherry,Lunch and Dinner,Veg,Palak Paneer,Iron (spinach),Protein (paneer),Calcium (paneer),Vitamin C (spinach),"Spinach curry with paneer, popular in Puducherry."
+Puducherry,Lunch and Dinner,Veg,Bharli Vangi,Iron (brinjal),Protein (groundnuts),Fiber (brinjal),Vitamin C (onion),Stuffed brinjal curry eaten in Puducherry.
+Puducherry,Lunch and Dinner,Veg,Vegetable Pulao,Carbohydrates (rice),Fiber (mixed vegetables),Iron (peas),,Rice cooked with vegetables in Puducherry.
+Puducherry,Lunch and Dinner,Non-Veg,Chicken Curry,Protein (chicken),Vitamin B12 (chicken),Iron (spices),,Spiced chicken curry eaten in Puducherry.
+Puducherry,Lunch and Dinner,Non-Veg,Fish Curry,Protein (fish),Omega-3 (fish),Vitamin A (coconut/tomato),Iron (kokum),Regional fish curry style from Puducherry.

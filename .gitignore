@@ -1,0 +1,22 @@
+# Streamlit-specific
+.streamlit/secrets.toml
+
+# Python virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Application-generated files
+uploads/
+generated_reports/
+
+# Database files
+*.db
+*.sqlite3
+
+# IDE-specific
+.vscode/
+.idea/
+

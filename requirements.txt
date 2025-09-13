@@ -1,0 +1,12 @@
+streamlit
+langchain
+langchain-google-genai
+langchain-community
+langchain-ollama
+google-generativeai
+pandas
+fpdf2
+Pillow
+toml
+faiss-cpu
+python-dotenv

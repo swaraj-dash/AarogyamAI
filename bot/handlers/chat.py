@@ -31,6 +31,10 @@ async def chat_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         photo_path = os.path.join(UPLOAD_DIR, "chat", filename)
         await file.download_to_drive(photo_path)
 
+    # Initialize chat history if not present
+    if 'chat_history' not in context.user_data:
+        context.user_data['chat_history'] = []
+
     # If no inputs at all, show help
     if not message_text and not photo_path:
         await update.message.reply_text(
@@ -48,7 +52,6 @@ async def chat_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         model = ai_engine.get_model()
         
-        # Build prompt history/context
         system_instruction = (
             f"You are AarogyamAI health assistant. You act as a supportive mental coach (Sukoon Saathi), "
             f"nutritionist (Aahar Visheshagya), and health analyst. "
@@ -56,13 +59,11 @@ async def chat_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"You must include a medical disclaimer advising consulting a real doctor for serious symptoms."
         )
         
-        prompt_parts = [system_instruction]
-        
-        # If photo is present
+        # If photo is present, handle as one-off multimodal analysis
         if photo_path:
             from PIL import Image
             img = Image.open(photo_path)
-            prompt_parts.append(img)
+            prompt_parts = [system_instruction, img]
             
             # Determine photo context if text is empty
             if not message_text:
@@ -70,11 +71,41 @@ async def chat_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     "Analyze this health-related image. If it is a prescription, extract medicine names, dosages, and instructions. "
                     "If it is a skin condition or wound, describe it neutrally, provide general first aid, and include a medical disclaimer."
                 )
-        
-        prompt_parts.append(f"\nUser query: {message_text}")
-        
-        response = model.generate_content(prompt_parts)
-        await update.message.reply_text(response.text, parse_mode="Markdown")
+            prompt_parts.append(f"\nUser query: {message_text}")
+            
+            response = model.generate_content(prompt_parts)
+            await update.message.reply_text(response.text, parse_mode="Markdown")
+        else:
+            # Persistent text chat using Gemini start_chat
+            # Format history for start_chat
+            gemini_history = []
+            for msg in context.user_data['chat_history']:
+                gemini_history.append(
+                    genai.types.Content(
+                        role=msg['role'],
+                        parts=[genai.types.Part.from_text(text=msg['parts'][0])]
+                    )
+                )
+                
+            chat = model.start_chat(history=gemini_history)
+            
+            # Prepend system instruction to prompt if it's the first message
+            if not context.user_data['chat_history']:
+                full_message = f"{system_instruction}\n\nUser: {message_text}"
+            else:
+                full_message = message_text
+                
+            response = chat.send_message(full_message)
+            
+            # Save history to session state
+            context.user_data['chat_history'].append({"role": "user", "parts": [message_text]})
+            context.user_data['chat_history'].append({"role": "model", "parts": [response.text]})
+            
+            # Keep history limited to the last 10 exchanges (20 messages)
+            if len(context.user_data['chat_history']) > 20:
+                context.user_data['chat_history'] = context.user_data['chat_history'][-20:]
+                
+            await update.message.reply_text(response.text, parse_mode="Markdown")
         
     except Exception as e:
         await update.message.reply_text(f"❌ Chat failed to process: {e}")

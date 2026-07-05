@@ -96,8 +96,47 @@ def main():
     # Callback query router
     app.add_handler(CallbackQueryHandler(callback_router))
     
+    # Configure daily reminders at 8:00 PM local time
+    import datetime
+    if app.job_queue:
+        app.job_queue.run_daily(
+            send_daily_reminders,
+            time=datetime.time(hour=20, minute=0, second=0)
+        )
+        print("Daily reminder job successfully scheduled at 8:00 PM local time.")
+    else:
+        print("WARNING: JobQueue is not available. Scheduled reminders will not run.")
+    
     print("AarogyamAI Telegram Bot is starting. Listening for messages...")
     app.run_polling()
+
+async def send_daily_reminders(context: ContextTypes.DEFAULT_TYPE):
+    """Sends daily reminders to log metrics to all registered users."""
+    print("Executing scheduled daily reminder job...")
+    try:
+        conn = db.get_db_connection()
+        users = conn.execute("SELECT user_id, name FROM users").fetchall()
+        conn.close()
+        
+        for u in users:
+            try:
+                user_id = u['user_id']
+                first_name = u['name'].split()[0]
+                await context.bot.send_message(
+                    chat_id=user_id,
+                    text=(
+                        f"Good evening, {first_name}! 🌅\n\n"
+                        "Don't forget to track your health today. Let's record your daily progress:\n"
+                        "📝 Run /log to log sleep, steps, mood, and check-in photos.\n"
+                        "🍲 Send /meal to log your breakfast, lunch, or dinner.\n"
+                        "📄 Submit with /submit to receive your daily PDF analysis!"
+                    )
+                )
+                print(f"Sent reminder successfully to user ID {user_id}")
+            except Exception as ex:
+                print(f"Failed to send reminder to user ID {user_id}: {ex}")
+    except Exception as e:
+        print(f"Failed to query database for reminders: {e}")
 
 if __name__ == "__main__":
     main()

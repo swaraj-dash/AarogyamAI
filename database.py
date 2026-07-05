@@ -8,8 +8,9 @@ import os
 DB_NAME = "aarogyam.db"
 
 def get_db_connection():
-    """Establishes a connection to the database with a timeout."""
+    """Establishes a connection to the database with a timeout and enables foreign keys support."""
     conn = sqlite3.connect(DB_NAME, timeout=20.0)
+    conn.execute("PRAGMA foreign_keys = ON")
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -159,9 +160,18 @@ def update_user_location(user_id, new_city, new_state):
     conn.close()
 
 def add_daily_log(log_data):
-    """Adds a full daily log entry."""
+    """Adds a full daily log entry, replacing any existing entry for the same user and date."""
     conn = get_db_connection()
     c = conn.cursor()
+    
+    # Check if a log for this date and user already exists
+    c.execute("SELECT log_id FROM daily_logs WHERE user_id = ? AND log_date = ?", 
+              (log_data['user_id'], log_data['log_date']))
+    existing = c.fetchone()
+    if existing:
+        # Cascade delete is enabled, so this automatically removes associated food_entries and exercise_entries
+        c.execute("DELETE FROM daily_logs WHERE log_id = ?", (existing['log_id'],))
+        
     c.execute('''
         INSERT INTO daily_logs (user_id, log_date, total_sleep_minutes, steps, mood, weight_kg,
                                 selfie_path, posture_pic_path, travel_info, hydration_level,

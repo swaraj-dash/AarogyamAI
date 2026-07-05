@@ -177,13 +177,13 @@ def generate_daily_report(user_profile, log_data, full_analysis, recommendations
     
     try:
         print(f"DEBUG: Attempting to save PDF to: {file_path}")
-        pdf.output(file_path, 'F')
+        pdf.output(file_path)
         print("DEBUG: PDF file saved successfully.")
         return file_path
     except Exception as e:
         print("\n--- CRITICAL ERROR ---")
         print("Failed to save the PDF file to disk.")
         print(f"Error: {e}")
-        print("This is likely a file permissions issue.")
+        print("This is likely a file permissions issue or directory missing.")
         print("---------------------\n")
         return None

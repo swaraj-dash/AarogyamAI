@@ -1,12 +1,14 @@
 streamlit
-langchain
+langchain>=0.2
 langchain-google-genai
 langchain-community
 langchain-ollama
-google-generativeai
+google-generativeai>=0.8.0
 pandas
 fpdf2
-Pillow
+pillow
 toml
 faiss-cpu
 python-dotenv
+python-telegram-bot[ext]>=21.0
+apscheduler

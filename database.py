@@ -105,11 +105,12 @@ def generate_unique_user_id():
             conn.close()
             return user_id
 
-def add_user(user_data):
+def add_user(user_data, user_id=None):
     """Adds a new user to the database."""
     conn = get_db_connection()
     c = conn.cursor()
-    user_id = generate_unique_user_id()
+    if user_id is None:
+        user_id = generate_unique_user_id()
     c.execute('''
         INSERT INTO users (user_id, name, dob, height_cm, gender, location_state, city, food_preference,
                          health_goal, preferred_exercise, medical_conditions, 
@@ -218,3 +219,10 @@ def get_previous_day_image_paths(user_id, current_log_date):
         print(f"Error fetching previous day's images: {e}")
         conn.close()
         return None
+
+def user_exists(user_id):
+    """Checks if a user exists in the database by their user_id."""
+    conn = get_db_connection()
+    user = conn.execute("SELECT 1 FROM users WHERE user_id = ?", (user_id,)).fetchone()
+    conn.close()
+    return user is not None

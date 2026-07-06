@@ -1,514 +1,241 @@
-# Aarogyam AI - Complete Project Documentation
+# AarogyamAI - Technical Architecture & Documentation
 
-## Table of Contents
-1. [Project Overview](#project-overview)
-2. [Project Structure](#project-structure)
-3. [Core Features & Functionality](#core-features--functionality)
-4. [Technical Implementation Details](#technical-implementation-details)
-5. [AI Models & APIs Used](#ai-models--apis-used)
-6. [Database Schema](#database-schema)
-7. [How to Run the Project](#how-to-run-the-project)
-8. [File-by-File Explanation](#file-by-file-explanation)
+AarogyamAI is a production-grade, multimodal clinical wellness companion delivered directly through **Telegram**. It is designed to track daily physical and mental metrics, analyze nutrition through text or image inputs, recommend regional Indian recipes via a localized RAG engine, generate clinical-grade PDF summaries, and track health trends over time.
 
 ---
 
-## Project Overview
+## 🏗️ System Architecture
 
-**Aarogyam AI** is a comprehensive, AI-powered health and wellness application built with Streamlit. It provides personalized insights and guidance across multiple dimensions of health including mental wellness, physical fitness, nutrition, and lifestyle. The application leverages advanced AI models from Google (Gemini), local AI models via Ollama (Llama 3), and various machine learning techniques to deliver a holistic wellness experience.
+AarogyamAI uses a modular service-oriented architecture written in Python, combining a SQLite database, a regional RAG (Retrieval-Augmented Generation) CSV engine, and the Gemini 2.0 Flash API.
 
-### Key Objectives:
-- Centralized platform for logging health and wellness metrics
-- AI-powered personalized insights based on user data
-- Mental wellness support through chatbots
-- Nutrition analysis and recommendations
-- Fitness planning and tracking
-- Eco-friendly product alternatives
-- Downloadable PDF wellness reports
+```mermaid
+graph TD
+    User([Telegram User]) <-->|Commands & Files| TelegramBot[Telegram Bot Interface]
+    
+    subgraph Bot Layer [bot/handlers]
+        TelegramBot -->|Onboarding| OnboardingH[start.py]
+        TelegramBot -->|Daily Questionnaires| LogMetricsH[log_metrics.py]
+        TelegramBot -->|Meals & Exercises| LogFoodH[log_food.py]
+        TelegramBot -->|Tools & Workouts| ToolsH[tools.py]
+        TelegramBot -->|Wellness Coaching| ChatH[chat.py]
+        TelegramBot -->|PDF Reports| ReportH[report.py]
+        TelegramBot -->|Analytics Trends| AnalyticsH[analytics.py]
+    end
 
----
+    subgraph Service Layer [services/]
+        LogMetricsH & LogFoodH & AnalyticsH & OnboardingH -->|Queries & Inserts| DB[database.py]
+        ChatH & LogFoodH -->|Text & Vision Parsing| AIEngine[ai_engine.py]
+        ReportH -->|Aggregate Daily Context| ReportService[report_service.py]
+        ReportService -->|Regional Nutrition RAG| RAGEngine[rag_engine.py]
+        ReportService -->|Layout & Draw PDF| PDFGen[report_generator.py]
+        AnalyticsH -->|Trend Summary| AnalyticsService[analytics_service.py]
+    end
 
-## Project Structure
-
-```
-aarogyamai/
-├── app.py                          # Main Streamlit application entry point
-├── ai_utils.py                     # AI model configurations and utility functions
-├── database.py                     # SQLite database management
-├── report_generator.py             # PDF report generation module
-├── requirements.txt                # Python dependencies
-├── README.md                       # Project overview and specifications
-├── .gitignore                      # Git ignore rules
-├── assets/                         # Font files for PDF generation
-│   ├── DejaVuSans.ttf
-│   ├── DejaVuSans-Bold.ttf
-│   └── DejaVuSans-Oblique.ttf
-├── pages/                          # Streamlit multi-page app pages
-│   ├── 1_🧠_Sukoon_Saathi.py      # Mental wellness chatbot
-│   ├── 2_🩺_Sehat_Darpan.py       # Health image analysis & assistant
-│   ├── 3_🏋️‍♀️_Urja_Path.py         # Personalized workout plans
-│   ├── 4_🌿_Shuddh_Vikalp.py      # Eco-friendly alternatives
-│   ├── 5_👩‍⚕️_Aahar_Visheshagya.py # Nutritionist chatbot
-│   └── 6_⚙️_Profile.py           # User profile & reports
-├── rag_data/                       # RAG system data
-│   └── india_state_meal_nutrient_recs.csv
-├── faiss_index/                    # FAISS vector database
-│   ├── index.faiss
-│   └── index.pkl
-├── uploads/                        # User uploaded images
-│   ├── food/
-│   └── profile/
-└── generated_reports/              # Generated PDF reports
+    subgraph External & Storage
+        DB <-->|Read/Write| SQLite[(aarogyam.db)]
+        RAGEngine <-->|CSV Lookup| RAGCSV[india_state_meal_nutrient_recs.csv]
+        AIEngine & RAGEngine & AnalyticsService <-->|Gemini API| Gemini[Gemini 2.0 Flash]
+        PDFGen -->|Save PDF| ReportsDir[generated_reports/]
+    end
 ```
 
 ---
 
-## Core Features & Functionality
+## 🗄️ Database Schema & Storage Strategy
 
-### 1. User Authentication & Onboarding
-- **Signup System**: Creates a detailed wellness profile including:
-  - Personal info (name, DOB, gender, height, weight)
-  - Location (state, city)
-  - Food preferences (Vegetarian/Veg+Non-Veg)
-  - Health goals (Weight Loss, Weight Gain, etc.)
-  - Medical history (conditions, medications, allergies)
-  - Family medical history
-- **Login System**: 5-digit unique user ID authentication
-- **Profile Management**: Users can view and edit their profile
+All user profiles, daily metrics, logs, food entries, and workout exercises are persisted inside a local SQLite database (`aarogyam.db`). The database is designed as a structured time-series store:
 
-### 2. Daily Logging System
-Users can log their daily activities including:
-- **Food Diary**: 
-  - Meal type (Breakfast, Lunch, Dinner, Snack)
-  - Photo uploads of food
-  - Text descriptions
-- **Exercise Diary**:
-  - Exercise type (Gym, Yoga, Sports, etc.)
-  - Duration in minutes
-  - Details and sets/reps
-- **Other Metrics**:
-  - Sleep hours
-  - Step count
-  - Mood tracking
-  - Stress level
-  - Focus level
-  - Water intake
-  - Weight
-  - Task completion
-  - Travel information
+```mermaid
+erDiagram
+    USERS {
+        integer user_id PK "Telegram User ID"
+        text name
+        text dob
+        real height_cm
+        text gender
+        text location_state
+        text city
+        text food_preference
+        text health_goal
+        text medical_conditions
+        text medications
+        text allergies
+        text surgical_history
+        text family_history
+    }
+    DAILY_LOGS {
+        integer log_id PK "Auto Increment"
+        integer user_id FK "References USERS.user_id"
+        text log_date "YYYY-MM-DD"
+        integer total_sleep_minutes
+        integer steps
+        text mood
+        real weight_kg
+        text selfie_path
+        text posture_pic_path
+        text travel_info "JSON object"
+        real hydration_level
+        text stress_level
+        text task_completion
+        text focus_level
+    }
+    FOOD_ENTRIES {
+        integer food_id PK "Auto Increment"
+        integer log_id FK "References DAILY_LOGS.log_id ON DELETE CASCADE"
+        text meal_type "Breakfast/Lunch/Dinner/Snack"
+        text food_image_path
+        text description
+    }
+    EXERCISE_ENTRIES {
+        integer exercise_id PK "Auto Increment"
+        integer log_id FK "References DAILY_LOGS.log_id ON DELETE CASCADE"
+        text exercise_type
+        text details
+        integer duration_minutes
+    }
 
-### 3. AI-Powered Analysis (Master AI)
-The app uses **Gemini 1.5 Flash** to analyze:
-- **Wellness Score**: 1-100 score with justification
-- **Physical Activity Analysis**: Feedback on steps and exercise
-- **Mental Clarity Analysis**: Summary of mood, stress, focus, sleep
-- **Nutritional Analysis**: 
-  - Per-meal breakdown with calorie/macronutrient estimates
-  - Overall diet summary
-  - Positives and improvement areas
-- **Image Analysis**:
-  - Selfie analysis for skin clarity, tiredness
-  - Posture photo analysis
-- **Comparative Analysis**: Compare today's images with yesterday's
+    USERS ||--o{ DAILY_LOGS : "logs"
+    DAILY_LOGS ||--o{ FOOD_ENTRIES : "contains"
+    DAILY_LOGS ||--o{ EXERCISE_ENTRIES : "contains"
+```
 
-### 4. RAG-Powered Recommendations
-- Uses **FAISS** vector database for similarity search
-- Integrates with **Ollama (Llama 3)** for generating contextual recommendations
-- Provides state-specific meal recommendations based on nutritional deficiencies
-- Considers user's food preferences and location
-
-### 5. PDF Report Generation
-- Comprehensive daily wellness report
-- Includes:
-  - Wellness score
-  - AI insights
-  - Metrics table
-  - Nutritional breakdown with images
-  - Personalized recommendations
-- Custom fonts (DejaVu Sans) for professional appearance
-
-### 6. Sukoon Saathi (Mental Wellness Coach)
-- AI chatbot using **Gemini 1.0 Pro**
-- Compassionate mental wellness support
-- Safe space for users to talk and reflect
-- Session-based conversation history
-
-### 7. Sehat Darpan (Health Mirror)
-- **Skin/Wound Analysis**: Upload images for AI analysis
-- **Prescription Analysis**: Read and summarize prescriptions
-- **Health Chat Assistant**: General health Q&A
-
-### 8. Urja Path (Energy Path)
-- Generates personalized daily workout plans
-- Considers user's health goals and preferences
-- Integrates with daily log
-
-### 9. Shuddh Vikalp (Pure Alternative)
-- Suggests healthy, eco-friendly alternatives
-- Uses web search agent (Tavily API)
-- Image-based or text-based queries
-
-### 10. Aahar Visheshagya (Nutritionist Coach)
-- Expert nutrition chatbot using **Gemini 1.5 Flash**
-- Diet plan advice
-- Healthy recipes
-- Nutrition education
+### Key Integrity & Overwrite Protections
+1. **Foreign Key Enforcement**: `PRAGMA foreign_keys = ON;` is run on every database connection. This guarantees that deleting a daily log automatically clears all associated `food_entries` and `exercise_entries` via `ON DELETE CASCADE`, preventing orphan rows.
+2. **Duplicate Overwrite Protection**: Inside `add_daily_log()`, the engine queries the database to see if a log already exists for that `user_id` and `log_date`. If found, it deletes the existing log and cascades its sub-entries *before* inserting the new one. This allows users to re-submit their daily logs without duplicating metrics.
 
 ---
 
-## Technical Implementation Details
+## 🧠 Service Layer & Logic Breakdowns
 
-### Frontend Framework
-- **Streamlit**: Python-based web framework for rapid UI development
-- Multi-page application architecture
-- Session state management for user data
+### 1. Multimodal AI Engine (`services/ai_engine.py`)
+This engine encapsulates interactions with the Gemini 2.0 Flash model. It is completely cloud-ready and handles:
+*   **Nutrition Analysis**: Parses food description texts or uploaded meal photos. It extracts calorie estimates, protein, carbs, fats, and key micro-nutrients, returning them as structured tables.
+*   **Multimodal Prescription & Wound Scanner**: Integrates with the `/chat` command. Users can upload prescriptions or photos of cuts/burns. Gemini extracts details, scans ingredients, and acts as a safe, preliminary triage assistant.
+*   **Alternative Search Grounding**: A wrapper (`SearchAgentWrapper`) utilizing Gemini's native Google Search grounding. If a user asks for healthy alternatives (e.g., `/alternative plastic water bottle`), Gemini runs a real-time web search and lists verified, eco-friendly alternatives with local Indian links.
 
-### Backend & Database
-- **SQLite**: Lightweight SQL database for data persistence
-- Tables: users, daily_logs, food_entries, exercise_entries, reports
+### 2. Regional RAG Engine (`services/rag_engine.py`)
+A custom regional RAG system that provides location-specific nutritional recommendations:
+*   **CSV Index**: Located in `rag_data/india_state_meal_nutrient_recs.csv`, mapping Indian states, meal types, and regional dishes to target nutrients (e.g., iron-rich foods in Karnataka like *Ragi Mudde*).
+*   **Search Logic**: Retrieves matching regional dishes based on:
+    - User's state of residence (`location_state`).
+    - User's diet preference (Vegetarian, Non-Vegetarian, Vegan).
+    - The nutrient lacking in the user's daily meals (identified during the nutrition summary run).
+*   **Synthesis**: The retrieved records are sent to Gemini to compile custom, step-by-step recipe outlines and advice suited to the user's region.
 
-### AI/ML Integration
-- **Google Gemini Models**:
-  - `gemini-1.5-flash-latest`: Main analysis model
-  - `gemini-1.0-pro`: Mental wellness chatbot
-  - Vision capabilities for image analysis
-- **Ollama (Llama 3)**: Local LLM for RAG recommendations
-- **FAISS**: Vector database for semantic search
-- **LangChain**: Framework for building LLM chains and agents
+### 3. Historical Analytics Engine (`services/analytics_service.py`)
+Tracks health trajectories and provides progress analytics:
+*   **Averages Calculation**: Aggregates steps, sleep duration, and water intake over a period (7 days, 30 days, or 365 days).
+*   **Weight Trajectory**: Checks the oldest vs newest weight entry to determine weight loss/gain.
+*   **Mental Indicators**: Compiles mood frequencies and stress logs to map mental wellness.
+*   **Comparative Progress Review**: Gemini reviews the compiled statistical history alongside the user's profile and health goals (e.g., weight loss) to write a detailed summary explaining whether the user is improving, plateauing, or regressing.
 
-### PDF Generation
-- **FPDF2**: Python library for PDF creation
-- Custom fonts embedded (DejaVu Sans family)
-- Image embedding support
-- Professional formatting with headers, footers, tables
-
----
-
-## AI Models & APIs Used
-
-| Feature | Model/Technology | Purpose |
-|---------|-----------------|---------|
-| Master Analysis | Gemini 1.5 Flash | Comprehensive daily log analysis |
-| Mental Wellness | Gemini 1.0 Pro | Sukoon Saathi chatbot |
-| Nutrition Coach | Gemini 1.5 Flash | Aahar Visheshagya chatbot |
-| Health Assistant | Gemini 1.5 Flash | Sehat Darpan chatbot |
-| Vision Analysis | Gemini Vision | Skin, prescription, food image analysis |
-| RAG Recommendations | Ollama (Llama 3) | State-specific meal suggestions |
-| Vector Search | FAISS | Semantic search in nutrient database |
-| Web Search | Tavily API | Shuddh Vikalp alternatives search |
+### 4. PDF Generation Engine (`report_generator.py`)
+A customized subclass of `FPDF` (fpdf2) that creates clean daily reports:
+*   **Layout Structure**: Features custom grid cards, step goals progress bars (drawn using geometric rects), and tables outlining calorie intake.
+*   **Unicode BMP Sanitization**: Sanitizes text input to filter out high-byte color emojis (`> 0xffff`) while preserving Standard Unicode BMP characters (`< 0xffff`). This enables seamless multi-lingual rendering (e.g., Hindi characters or accents) without crashing the DejaVu font compiler.
+*   **Font Isolation**: Fonts are resolved dynamically relative to `config.BASE_DIR`, preventing missing font file crashes.
 
 ---
 
-## Database Schema
+## 🤖 Telegram Commands Directory
 
-### Users Table
-```
-sql
-CREATE TABLE users (
-    user_id INTEGER PRIMARY KEY,
-    name TEXT NOT NULL,
-    dob TEXT NOT NULL,
-    height_cm REAL NOT NULL,
-    gender TEXT NOT NULL,
-    location_state TEXT NOT NULL,
-    city TEXT NOT NULL,
-    food_preference TEXT NOT NULL,
-    health_goal TEXT NOT NULL,
-    preferred_exercise TEXT,
-    medical_conditions TEXT,
-    medications TEXT,
-    allergies TEXT,
-    surgical_history TEXT,
-    family_history TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)
-```
+| Command | Parameters | Scope / State | Description |
+|---|---|---|---|
+| **`/start`** | None | Public | Initiates the step-by-step conversational onboarding flow. Saves profile to the DB. |
+| **`/profile`** | None | Registered | Displays user demographics, health goals, and medical conditions with inline edit buttons. |
+| **`/location`** | `[State] [City]` | Registered | Quick location update command (e.g., `/location Karnataka Bengaluru`). |
+| **`/log`** | None | Conversation | Starts the multi-step daily questionnaire mapping steps, sleep, water, mood, and photos. |
+| **`/meal`** | `[description]` | Registered | Logs a meal. Supports text descriptions or photo uploads with `/meal` in the caption. |
+| **`/exercise`** | `[type] [duration] [details]` | Registered | Logs an exercise entry to the current daily log. |
+| **`/submit`** | None | Registered | Triggers the daily analysis pipeline and generates the downloadable wellness PDF report. |
+| **`/report`** | None | Registered | Downloads the user's latest daily PDF wellness report. |
+| **`/workout`** | None | Registered | Generates a daily exercise checklist. Mark off items with interactive checkboxes (⬜/✅). |
+| **`/alternative`** | `[item]` | Public | Web-grounded search agent to find healthy, eco-friendly alternatives (optional photo support). |
+| **`/chat`** | `[message]` | Public | Multi-turn health chat assistant. Keeps message history. Supports images (prescriptions/skin checks). |
+| **`/weekly`** | None | Registered | Generates a 7-day progress review evaluating trends against your primary health goals. |
+| **`/monthly`** | None | Registered | Generates a 30-day health trends analysis. |
+| **`/yearly`** | None | Registered | Generates a 365-day overview mapping progress. |
+| **`/help`** | None | Public | Displays descriptions of all available bot commands. |
 
-### Daily Logs Table
-```
-sql
-CREATE TABLE daily_logs (
-    log_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    log_date TEXT NOT NULL,
-    total_sleep_minutes INTEGER,
-    steps INTEGER,
-    mood TEXT,
-    weight_kg REAL,
-    selfie_path TEXT,
-    posture_pic_path TEXT,
-    travel_info TEXT,
-    hydration_level REAL,
-    stress_level TEXT,
-    menstrual_cycle_day INTEGER,
-    task_completion TEXT,
-    focus_level TEXT,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
-)
+---
+
+## 🔄 Sequence Flows
+
+### 1. Onboarding Flow (`/start`)
+```mermaid
+sequenceDiagram
+    participant User
+    participant Bot as start.py
+    participant DB as database.py
+
+    User->>Bot: Send /start
+    Bot->>User: Prompt for Name
+    User->>Bot: Reply Name
+    Bot->>User: Prompt for Gender (Inline Buttons)
+    User->>Bot: Tap Gender
+    Bot->>User: Prompt for Location State & City
+    User->>Bot: Reply Location
+    Bot->>User: Prompt for Health Goals & Conditions
+    User->>Bot: Reply details
+    Bot->>DB: db.add_user(user_profile)
+    Bot->>User: Onboarding Complete! Start tracking with /log.
 ```
 
-### Food Entries Table
-```
-sql
-CREATE TABLE food_entries (
-    food_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    log_id INTEGER NOT NULL,
-    meal_type TEXT NOT NULL,
-    food_image_path TEXT,
-    description TEXT,
-    FOREIGN KEY (log_id) REFERENCES daily_logs(log_id) ON DELETE CASCADE
-)
-```
+### 2. Daily Log Submission (`/submit`)
+```mermaid
+sequenceDiagram
+    participant User
+    participant Bot as report.py
+    participant DB as database.py
+    participant AI as ai_engine.py
+    participant RAG as rag_engine.py
+    participant PDF as report_generator.py
 
-### Exercise Entries Table
-```
-sql
-CREATE TABLE exercise_entries (
-    exercise_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    log_id INTEGER NOT NULL,
-    exercise_type TEXT NOT NULL,
-    details TEXT,
-    duration_minutes INTEGER,
-    FOREIGN KEY (log_id) REFERENCES daily_logs(log_id) ON DELETE CASCADE
-)
+    User->>Bot: Send /submit
+    Bot->>DB: db.get_full_daily_log(user_id, today)
+    DB-->>Bot: Return daily metrics & logs
+    
+    Bot->>AI: Analyze metrics (wellness score, nutrition calories)
+    AI-->>Bot: Return daily score & nutritional breakdown
+    
+    Bot->>RAG: Get regional meal recommendation (state + deficiency)
+    RAG-->>Bot: Return regional dish recipes
+    
+    Bot->>PDF: generate_daily_report()
+    PDF-->>Bot: Return absolute PDF path
+    Bot->>User: Send wellness PDF file and score summary in chat
 ```
 
 ---
 
-## File-by-File Explanation
+## 🔒 Reliability Features & Safety Policies
 
-### app.py (Main Application)
-**Purpose**: Main Streamlit entry point handling routing, authentication, and daily logging
-
-**Key Functions**:
-- `signup_page()`: User registration with comprehensive wellness profile
-- `login_page()`: User authentication using 5-digit ID
-- `main_app()`: Daily log entry interface with food, exercise, and metrics
-- `save_uploaded_file()`: Process and save uploaded images
-- `reset_daily_log_forms()`: Clear form data after submission
-
-**Session State Management**:
-- `logged_in`: Boolean for authentication status
-- `user_info`: Dictionary containing user profile data
-- `page`: Current page/route
-- `food_entries`: List of food log entries
-- `exercise_entries`: List of exercise log entries
-- `report_path`: Path to generated PDF
+1. **Path-Independent Configuration**: Exposed directory references (`UPLOAD_DIR`, `REPORT_DIR`, `DATABASE_PATH`) inside `config.py` are absolute paths anchored to `config.BASE_DIR` (project root). This guarantees the script executes cleanly from cron processes, Docker containers, or subfolders without misplacing data.
+2. **Background Reminder Pings**: Inside `bot/main.py`, a daily automated background task is scheduled via `JobQueue` (leveraging `APScheduler`). It fires at **8:00 PM local time** every evening, scanning the database to identify users who haven't logged metrics today, and sending them reminders.
+3. **Clinical Disclaimer Policy**: Every AI consultation, chat response, skin scan, or prescription summary is automatically appended with a bold clinical disclaimer:
+   > **⚠️ Disclaimer**: This is an AI wellness evaluation, not a medical diagnosis. Please consult a qualified practitioner before modifying your medication or exercise routines.
 
 ---
 
-### ai_utils.py (AI Utilities)
-**Purpose**: Central configuration for all AI models and utility functions
+## 🚀 Setup & Execution Guide
 
-**Key Components**:
-
-1. **Model Configuration**:
-   - `MASTER_ANALYSIS_MODEL_NAME`: "gemini-1.5-flash-latest"
-   - `TEXT_MODEL_NAME`: "gemini-1.5-flash-latest"
-   - API key configuration via Streamlit secrets
-
-2. **Functions**:
-   - `get_master_model()`: Returns configured Gemini model for analysis
-   - `get_text_model()`: Returns text generation model
-   - `get_vision_model()`: Returns vision-capable model
-   - `load_nutrient_data()`: Loads RAG CSV data into pandas DataFrame
-
-3. **generate_comprehensive_daily_analysis()**:
-   - Takes user profile, log data, and previous day images
-   - Constructs multimodal prompt with text and images
-   - Requests structured JSON output with wellness score, nutrition analysis, etc.
-   - Handles image comparison between days
-
-4. **get_rag_recommendations(user_profile, lacking_nutrient)**:
-   - Generates general food recommendations
-   - Loads state-specific nutrient data
-   - Filters by state, food preference, and deficient nutrient
-   - Uses Ollama (Llama 3) via LangChain to generate contextual recommendations
-   - Returns both general and state-specific advice
-
-5. **get_environment_wellness_agent()**:
-   - Creates LangChain agent for web search
-   - Uses Tavily API for finding eco-friendly alternatives
-
----
-
-### database.py (Database Management)
-**Purpose**: SQLite database operations for all data persistence
-
-**Key Functions**:
-
-1. `create_tables()`: Initializes all database tables
-2. `generate_unique_user_id()`: Creates 5-digit unique ID
-3. `add_user(user_data)`: Creates new user profile
-4. `get_user(user_id)`: Retrieves user by ID
-5. `update_user_profile()`: Updates user information
-6. `update_user_location()`: Updates city/state
-7. `add_daily_log(log_data)`: Saves complete daily log with food/exercise entries
-8. `get_full_daily_log(log_id)`: Retrieves complete log with all entries
-9. `get_previous_day_image_paths()`: Fetches images for comparison
-
----
-
-### report_generator.py (PDF Generation)
-**Purpose**: Creates professional PDF wellness reports
-
-**Key Components**:
-
-1. **PDF Class** (extends FPDF):
-   - Custom header with logo and title
-   - Footer with page numbers
-   - `section_title()`: Formatted section headers
-   - `section_body()`: Content with list support
-   - `draw_steps_bar()`: Visual step progress bar
-
-2. **generate_daily_report()**:
-   - Takes user profile, log data, AI analysis, and recommendations
-   - Generates multi-page professional report
-   - Embeds food images
-   - Creates nutrition tables
-   - Formats AI summaries and recommendations
-
-3. **Special Features**:
-   - Unicode font support (DejaVu Sans)
-   - Image aspect ratio preservation
-   - Automatic page breaks
-   - Error handling for image embedding
-
----
-
-### pages/1_🧠_Sukoon_Saathi.py
-**Purpose**: Mental wellness chatbot
-
-**Features**:
-- Uses Gemini 1.0 Pro
-- Session-based chat history
-- Compassionate AI persona
-- Requires user login
-
----
-
-### pages/2_🩺_Sehat_Darpan.py
-**Purpose**: Health image analysis and Q&A
-
-**Tabs**:
-1. **Skin Analysis**: Upload skin/wound images for AI analysis
-2. **Prescription Reader**: Extract medicine details from prescription images
-3. **Health Chat**: General health questions answered by AI
-
-**Features**:
-- Uses Gemini Vision for image analysis
-- Medical disclaimers
-- Structured responses for prescriptions
-
----
-
-### pages/3_🏋️‍♀️_Urja_Path.py
-**Purpose**: Personalized workout plan generation
-
-**Features**:
-- Generates daily workout based on user goals and preferences
-- Interactive checkboxes for completion tracking
-- Integrates completed exercises to daily log
-
----
-
-### pages/4_🌿_Shuddh_Vikalp.py
-**Purpose**: Eco-friendly alternatives finder
-
-**Features**:
-- Image or text-based queries
-- Uses Tavily API via LangChain agent
-- Searches for healthy and sustainable alternatives
-- Provides links for purchasing in India
-
----
-
-### pages/5_👩‍⚕️_Aahar_Visheshagya.py
-**Purpose**: Nutritionist chatbot
-
-**Features**:
-- Expert nutrition advice
-- Diet plan recommendations
-- Healthy recipe suggestions
-- Gemini 1.5 Flash powered
-
----
-
-### pages/6_⚙️_Profile.py
-**Purpose**: User profile management and report downloads
-
-**Features**:
-- Display current profile information
-- Edit profile form with validation
-- List of generated PDF reports
-- Download past reports
-
----
-
-## How to Run the Project
-
-### Prerequisites
-1. Python 3.8+
-2. API Keys (in `.streamlit/secrets.toml`):
-   - `GOOGLE_API_KEY`: For Gemini models
-   - `TAVILY_API_KEY`: For web search (Shuddh Vikalp)
-
-### Installation Steps
-
-1. **Clone the repository**
-2. **Install dependencies**:
-   
-```
-bash
-   pip install -r requirements.txt
-   
-```
-3. **Configure secrets**:
-   Create `.streamlit/secrets.toml`:
-   
-```
-toml
-   GOOGLE_API_KEY = "your-api-key-here"
-   TAVILY_API_KEY = "your-tavily-key-here"
-   
-```
-4. **Run the application**:
-   
-```
-bash
-   streamlit run app.py
-   
+### Prerequisite Dependencies
+Install the required packages using pip:
+```bash
+pip install python-dotenv python-telegram-bot[ext] google-generativeai pandas pillow fpdf2 openpyxl cryptography apscheduler
 ```
 
-### For Local RAG (Optional)
-- Install and run Ollama with Llama 3
-- The app will automatically detect local availability
+### Configuration Setup
+Create a `.env` file in the project root:
+```env
+TELEGRAM_BOT_TOKEN="your_telegram_bot_token"
+GOOGLE_API_KEY="your_gemini_api_key"
+DATABASE_PATH="aarogyam.db"
+```
 
----
-
-## Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| streamlit | Web UI framework |
-| google-generativeai | Gemini AI models |
-| langchain | LLM orchestration |
-| langchain-community | LangChain integrations |
-| langchain-ollama | Ollama local models |
-| langchain-google-genai | Google GenAI integration |
-| pandas | Data handling |
-| fpdf2 | PDF generation |
-| pillow | Image processing |
-| faiss-cpu | Vector database |
-| python-dotenv | Environment variables |
-
----
-
-## Conclusion
-
-Aarogyam AI represents a comprehensive approach to personal wellness management, combining multiple AI technologies to provide personalized, actionable insights. The application demonstrates advanced integration of:
-- Multimodal AI for analyzing text, images, and structured data
-- Retrieval-Augmented Generation for domain-specific recommendations
-- Agentic AI for web search and real-time information
-- Professional PDF reporting for tangible outputs
-
-This project serves as a foundation for building sophisticated health and wellness applications with modern AI capabilities.
+### Running the Telegram Bot
+Simply launch the bot process:
+```bash
+python bot/main.py
+```
+Open Telegram, search for your bot's username, and start tracking your wellness journey!

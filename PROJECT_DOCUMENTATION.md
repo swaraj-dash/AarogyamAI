@@ -217,12 +217,21 @@ sequenceDiagram
 
 ---
 
+## 🔄 Dual-Interface System
+
+AarogyamAI features a unique **dual-interface capability** sharing the same unified time-series database backend (`aarogyam.db`). This allows recruiters or users to choose their preferred method of interaction:
+
+1. **Telegram Companion Bot**: A mobile-first, highly conversational, and interactive interface for daily updates, notifications, chat coaching, prescription parsing, and PDF report downloads.
+2. **Streamlit Web Dashboard**: A web-based analytical panel that displays charts, step records, sleep habits, hydration, and historical summaries. If you register or log metrics on Telegram, the graphs on the Streamlit dashboard automatically update in real-time!
+
+---
+
 ## 🚀 Setup & Execution Guide
 
 ### Prerequisite Dependencies
 Install the required packages using pip:
 ```bash
-pip install python-dotenv python-telegram-bot[ext] google-generativeai pandas pillow fpdf2 openpyxl cryptography apscheduler
+pip install python-dotenv python-telegram-bot[ext] google-generativeai pandas streamlit pillow fpdf2 openpyxl cryptography apscheduler
 ```
 
 ### Configuration Setup
@@ -233,9 +242,19 @@ GOOGLE_API_KEY="your_gemini_api_key"
 DATABASE_PATH="aarogyam.db"
 ```
 
-### Running the Telegram Bot
+### Running the Services
+
+#### Option A: Running the Telegram Bot (Conversational Interface)
 Simply launch the bot process:
 ```bash
 python bot/main.py
 ```
-Open Telegram, search for your bot's username, and start tracking your wellness journey!
+Open Telegram, search for your bot's username, and send `/start` to begin tracking your wellness journey.
+
+#### Option B: Running the Streamlit Web App (Visual Dashboard)
+To launch the local web interface, execute:
+```bash
+streamlit run app.py
+```
+This opens the analytical dashboard in your web browser at `http://localhost:8501`.
+

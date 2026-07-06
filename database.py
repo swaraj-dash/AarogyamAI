@@ -4,12 +4,11 @@ import time
 from datetime import datetime, timedelta
 import json
 import os
-
-DB_NAME = "aarogyam.db"
+import config
 
 def get_db_connection():
     """Establishes a connection to the database with a timeout and enables foreign keys support."""
-    conn = sqlite3.connect(DB_NAME, timeout=20.0)
+    conn = sqlite3.connect(config.DATABASE_PATH, timeout=20.0)
     conn.execute("PRAGMA foreign_keys = ON")
     conn.row_factory = sqlite3.Row
     return conn

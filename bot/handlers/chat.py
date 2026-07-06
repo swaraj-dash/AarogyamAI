@@ -5,8 +5,9 @@ from telegram.ext import ContextTypes
 import google.generativeai as genai
 import database as db
 from services import ai_engine
+import config
 
-UPLOAD_DIR = "uploads"
+UPLOAD_DIR = config.UPLOAD_DIR
 
 async def chat_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Unified conversational assistant for health, mental wellness, and image diagnostics."""

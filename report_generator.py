@@ -10,11 +10,14 @@ def sanitize_text(text):
 
 class PDF(FPDF):
     def header(self):
-        try: self.add_font('DejaVu', 'B', 'assets/DejaVuSans-Bold.ttf', uni=True)
+        import config
+        import os
+        assets_dir = os.path.join(config.BASE_DIR, "assets")
+        try: self.add_font('DejaVu', 'B', os.path.join(assets_dir, 'DejaVuSans-Bold.ttf'), uni=True)
         except RuntimeError: pass
-        try: self.add_font('DejaVu', '', 'assets/DejaVuSans.ttf', uni=True)
+        try: self.add_font('DejaVu', '', os.path.join(assets_dir, 'DejaVuSans.ttf'), uni=True)
         except RuntimeError: pass
-        try: self.add_font('DejaVu', 'I', 'assets/DejaVuSans-Oblique.ttf', uni=True)
+        try: self.add_font('DejaVu', 'I', os.path.join(assets_dir, 'DejaVuSans-Oblique.ttf'), uni=True)
         except RuntimeError: pass
         self.set_fill_color(240, 240, 240); self.rect(0, 0, 210, 10, 'F')
         self.set_font('DejaVu', 'B', 16); self.set_text_color(50, 50, 50)
@@ -50,6 +53,12 @@ class PDF(FPDF):
         self.ln(3)
 
 def draw_steps_bar(pdf, steps, goal):
+    if steps is None:
+        steps = 0
+    try:
+        steps = int(steps)
+    except (ValueError, TypeError):
+        steps = 0
     pdf.ln(2)
     pdf.set_x(pdf.l_margin)
     pdf.set_font('DejaVu', 'B', 10); pdf.cell(0, 8, "Daily Step Progress:", 0, 1)
@@ -62,7 +71,9 @@ def draw_steps_bar(pdf, steps, goal):
     pdf.set_font('DejaVu', 'B', 11); pdf.cell(0, bar_height, f'{steps} / {goal} steps', 0, 1)
 
 def generate_daily_report(user_profile, log_data, full_analysis, recommendations):
-    report_dir = "generated_reports"; os.makedirs(report_dir, exist_ok=True)
+    import config
+    report_dir = config.REPORT_DIR
+    os.makedirs(report_dir, exist_ok=True)
     log_date_str = log_data['log_details']['log_date']
     user_id = user_profile['user_id']
     file_path = os.path.join(report_dir, f"report_{user_id}_{log_date_str}.pdf")
@@ -109,12 +120,33 @@ def generate_daily_report(user_profile, log_data, full_analysis, recommendations
         pdf.section_body(f"Posture Comparison: {comp_analysis.get('posture_feedback', 'Not available.')}")
 
         pdf.section_title("Today's Metrics")
-        metrics = { "Weight": f"{log_data['log_details']['weight_kg']} kg", "Sleep": f"{log_data['log_details']['total_sleep_minutes'] // 60}h {log_data['log_details']['total_sleep_minutes'] % 60}m", "Water Intake": f"{log_data['log_details']['hydration_level']} Liters", "Mood": f"{log_data['log_details']['mood']}", "Stress Level": f"{log_data['log_details']['stress_level']}", }
+        
+        sleep_mins = log_data['log_details'].get('total_sleep_minutes')
+        if sleep_mins is None:
+            sleep_mins = 0
+        sleep_str = f"{sleep_mins // 60}h {sleep_mins % 60}m"
+        
+        weight = log_data['log_details'].get('weight_kg')
+        weight_str = f"{weight} kg" if weight is not None else "N/A"
+        
+        hydration = log_data['log_details'].get('hydration_level')
+        hydration_str = f"{hydration} Liters" if hydration is not None else "N/A"
+        
+        mood = log_data['log_details'].get('mood') or "N/A"
+        stress = log_data['log_details'].get('stress_level') or "N/A"
+        
+        metrics = {
+            "Weight": weight_str,
+            "Sleep": sleep_str,
+            "Water Intake": hydration_str,
+            "Mood": mood,
+            "Stress Level": stress
+        }
         for key, value in metrics.items():
             pdf.set_x(pdf.l_margin)
             pdf.set_font('DejaVu', 'B', 10); pdf.cell(40, 8, key, 1)
             pdf.set_font('DejaVu', '', 10); pdf.cell(0, 8, f" {value}", 1, 1)
-        draw_steps_bar(pdf, log_data['log_details']['steps'], 10000)
+        draw_steps_bar(pdf, log_data['log_details'].get('steps'), 10000)
         
         pdf.add_page()
         pdf.section_title("Nutritional Breakdown")

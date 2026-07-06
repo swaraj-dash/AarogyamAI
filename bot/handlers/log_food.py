@@ -3,8 +3,9 @@ from datetime import datetime
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes
 import database as db
+import config
 
-UPLOAD_DIR = "uploads"
+UPLOAD_DIR = config.UPLOAD_DIR
 
 def ensure_daily_log_initialized(user_id, context):
     """Ensures there is an active daily log session in context.user_data."""

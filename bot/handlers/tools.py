@@ -6,8 +6,9 @@ from telegram.ext import ContextTypes
 import database as db
 from services import ai_engine
 from bot.handlers.log_food import ensure_daily_log_initialized
+import config
 
-UPLOAD_DIR = "uploads"
+UPLOAD_DIR = config.UPLOAD_DIR
 
 # --- WORKOUT HANDLER (URJA PATH) ---
 

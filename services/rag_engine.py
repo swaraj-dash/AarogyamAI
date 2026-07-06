@@ -7,7 +7,9 @@ from services import ai_engine
 def load_nutrient_data():
     """Loads the nutrient CSV into a pandas DataFrame."""
     try:
-        df = pd.read_csv("rag_data/india_state_meal_nutrient_recs.csv")
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        csv_path = os.path.join(base_dir, "rag_data", "india_state_meal_nutrient_recs.csv")
+        df = pd.read_csv(csv_path)
         df.columns = df.columns.str.lower().str.strip()
         return df
     except FileNotFoundError:

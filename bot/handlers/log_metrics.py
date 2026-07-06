@@ -9,12 +9,13 @@ from telegram.ext import (
     filters,
 )
 import database as db
+import config
 
 # Logging states
 SLEEP, STEPS, MOOD, STRESS, HYDRATION, WEIGHT, TASKS, FOCUS, SELFIE, POSTURE = range(10)
 
 # UPLOAD DIR
-UPLOAD_DIR = "uploads"
+UPLOAD_DIR = config.UPLOAD_DIR
 
 async def start_log(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Initiates the daily log process."""

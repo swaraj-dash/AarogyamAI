@@ -15,7 +15,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import config
 import database as db
-from bot.handlers import start, log_metrics, log_food, report, profile, tools, chat
+from bot.handlers import start, log_metrics, log_food, report, profile, tools, chat, analytics
 
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Shows the help menu with all commands."""
@@ -32,6 +32,9 @@ async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/submit - Complete today's log & generate report\n\n"
         "📊 **Tools & Reports**:\n"
         "/report - Get your latest daily PDF wellness report\n"
+        "/weekly - Get weekly analytics summary and progress review\n"
+        "/monthly - Get monthly trends analysis\n"
+        "/yearly - Get yearly overview of your improvements\n"
         "/workout - Get a personalized daily fitness routine\n"
         "/alternative [item] - Find eco-friendly alternatives (optional photo)\n\n"
         "💬 **Interactive Coach**:\n"
@@ -79,6 +82,9 @@ def main():
     app.add_handler(CommandHandler("exercise", log_food.log_exercise_cmd))
     app.add_handler(CommandHandler("submit", report.submit_daily_log))
     app.add_handler(CommandHandler("report", report.get_latest_report))
+    app.add_handler(CommandHandler("weekly", analytics.weekly_report_cmd))
+    app.add_handler(CommandHandler("monthly", analytics.monthly_report_cmd))
+    app.add_handler(CommandHandler("yearly", analytics.yearly_report_cmd))
     app.add_handler(CommandHandler("profile", profile.view_profile))
     app.add_handler(CommandHandler("location", profile.update_location_cmd))
     app.add_handler(CommandHandler("workout", tools.workout_cmd))

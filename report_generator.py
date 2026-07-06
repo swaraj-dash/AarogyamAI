@@ -6,7 +6,9 @@ from PIL import Image
 def sanitize_text(text):
     if not isinstance(text, str):
         text = str(text)
-    return text.encode('latin-1', 'replace').decode('latin-1')
+    # Strip out characters outside the Basic Multilingual Plane (BMP) e.g., complex emojis (ord > 0xffff)
+    # which would crash the DejaVu PDF font map, but keep normal UTF-8 characters like Hindi or accents.
+    return "".join(c for c in text if ord(c) < 0xffff)
 
 class PDF(FPDF):
     def header(self):

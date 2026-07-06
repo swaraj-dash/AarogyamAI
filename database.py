@@ -235,3 +235,33 @@ def user_exists(user_id):
     user = conn.execute("SELECT 1 FROM users WHERE user_id = ?", (user_id,)).fetchone()
     conn.close()
     return user is not None
+
+def get_logs_in_range(user_id, start_date, end_date):
+    """Retrieves all daily logs for a user within a specific date range, sorted by date ascending."""
+    conn = get_db_connection()
+    try:
+        logs = conn.execute(
+            "SELECT * FROM daily_logs WHERE user_id = ? AND log_date BETWEEN ? AND ? ORDER BY log_date ASC",
+            (user_id, start_date, end_date)
+        ).fetchall()
+        
+        full_logs = []
+        for log in logs:
+            log_dict = dict(log)
+            log_id = log_dict['log_id']
+            
+            foods = conn.execute("SELECT * FROM food_entries WHERE log_id = ?", (log_id,)).fetchall()
+            exercises = conn.execute("SELECT * FROM exercise_entries WHERE log_id = ?", (log_id,)).fetchall()
+            
+            full_logs.append({
+                "log_details": log_dict,
+                "food_entries": [dict(f) for f in foods],
+                "exercise_entries": [dict(e) for e in exercises]
+            })
+            
+        conn.close()
+        return full_logs
+    except Exception as e:
+        print(f"Error fetching logs in range: {e}")
+        conn.close()
+        return []

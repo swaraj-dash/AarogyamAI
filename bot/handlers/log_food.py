@@ -1,153 +1,82 @@
+"""
+/logfood — appends a single meal to today's log without touching anything
+else that day (uses get_or_create_daily_log + add_food_entry_only).
+Accepts either a photo (saved to disk, path stored) or a text description.
+"""
+from __future__ import annotations
+
 import os
-from datetime import datetime
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ContextTypes
-import database as db
+import uuid
+from datetime import date
+
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
+from telegram.ext import (
+    CommandHandler, ContextTypes, ConversationHandler, MessageHandler, filters,
+)
+
 import config
+import database as db
 
-UPLOAD_DIR = config.UPLOAD_DIR
+MEAL_TYPE, DESCRIPTION_OR_PHOTO = range(2)
 
-def ensure_daily_log_initialized(user_id, context):
-    """Ensures there is an active daily log session in context.user_data."""
-    if 'daily_log' not in context.user_data or context.user_data['daily_log'] is None:
-        context.user_data['daily_log'] = {
-            'user_id': user_id,
-            'log_date': datetime.now().strftime('%Y-%m-%d'),
-            'total_sleep_minutes': 480, # 8 hours default
-            'steps': 5000,
-            'mood': '😐 Neutral',
-            'weight_kg': 70.0,
-            'selfie_path': None,
-            'posture_pic_path': None,
-            'travel_info': {'km': 0, 'mode': 'None', 'location_changed': False, 'new_city': None, 'new_state': None},
-            'hydration_level': 2.0,
-            'stress_level': 'Mild',
-            'menstrual_cycle_day': None,
-            'task_completion': 'A Few',
-            'focus_level': 'Medium',
-            'food_entries': [],
-            'exercise_entries': []
-        }
+MEAL_KEYBOARD = ReplyKeyboardMarkup(
+    [["Breakfast", "Lunch"], ["Dinner", "Snack"]], one_time_keyboard=True, resize_keyboard=True
+)
 
-async def log_meal_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Handles logging a meal via /meal command."""
+
+async def logfood_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    if not db.user_exists(update.effective_user.id):
+        await update.message.reply_text("Please run /start first to set up your profile.")
+        return ConversationHandler.END
+    await update.message.reply_text("Which meal is this?", reply_markup=MEAL_KEYBOARD)
+    return MEAL_TYPE
+
+
+async def meal_type_step(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["food_meal_type"] = update.message.text.strip().lower()
+    await update.message.reply_text(
+        "Send a photo of the meal, or just describe it in text.",
+        reply_markup=ReplyKeyboardRemove(),
+    )
+    return DESCRIPTION_OR_PHOTO
+
+
+async def description_or_photo_step(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user_id = update.effective_user.id
-    if not db.user_exists(user_id):
-        await update.message.reply_text("Please register first using /start.")
-        return
+    meal_type = context.user_data.pop("food_meal_type", "snack")
+    log_id = db.get_or_create_daily_log(user_id, date.today().isoformat())
 
-    ensure_daily_log_initialized(user_id, context)
-    
-    # Check if they passed arguments with the command
-    args = context.args
-    description = " ".join(args) if args else ""
-    
-    # Check if a photo is attached
-    photo_path = None
     if update.message.photo:
         photo = update.message.photo[-1]
         file = await photo.get_file()
-        os.makedirs(os.path.join(UPLOAD_DIR, "food"), exist_ok=True)
-        timestamp = int(datetime.now().timestamp())
-        filename = f"{user_id}_{timestamp}_food.jpg"
-        photo_path = os.path.join(UPLOAD_DIR, "food", filename)
-        await file.download_to_drive(photo_path)
-    
-    # Store temporary state to gather meal type
-    context.user_data['temp_meal'] = {
-        'description': description,
-        'food_image_path': photo_path
-    }
-    
-    # Show inline keyboard to select meal type
-    keyboard = [
-        [
-            InlineKeyboardButton("Breakfast 🍳", callback_data="meal_Breakfast"),
-            InlineKeyboardButton("Lunch 🍱", callback_data="meal_Lunch"),
-        ],
-        [
-            InlineKeyboardButton("Dinner 🍽️", callback_data="meal_Dinner"),
-            InlineKeyboardButton("Snack 🍎", callback_data="meal_Snack"),
-        ]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    
-    await update.message.reply_text(
-        "What type of meal is this?",
-        reply_markup=reply_markup
-    )
+        os.makedirs(os.path.join(config.UPLOAD_DIR, "food"), exist_ok=True)
+        filename = f"{user_id}_{uuid.uuid4().hex[:8]}.jpg"
+        filepath = os.path.join(config.UPLOAD_DIR, "food", filename)
+        await file.download_to_drive(filepath)
+        description = (update.message.caption or "").strip() or None
+        db.add_food_entry_only(log_id, meal_type, description=description, food_image_path=filepath)
+    else:
+        description = update.message.text.strip()
+        db.add_food_entry_only(log_id, meal_type, description=description)
 
-async def meal_type_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Callback query handler for meal type selection."""
-    query = update.callback_query
-    await query.answer()
-    
-    meal_type = query.data.split("_")[1]
-    temp_meal = context.user_data.get('temp_meal')
-    
-    if not temp_meal:
-        await query.edit_message_text("Session expired. Please try logging the meal again using /meal.")
-        return
+    await update.message.reply_text(f"Logged your {meal_type}. Send /logfood again for another meal.")
+    return ConversationHandler.END
 
-    # Initialize log session if needed
-    ensure_daily_log_initialized(update.effective_user.id, context)
-    
-    # Add food entry
-    food_entry = {
-        'meal_type': meal_type,
-        'food_image_path': temp_meal['food_image_path'],
-        'description': temp_meal['description'] or "Logged via Telegram"
-    }
-    context.user_data['daily_log']['food_entries'].append(food_entry)
-    context.user_data.pop('temp_meal', None)
-    
-    msg = f"Logged {meal_type} successfully! 🍲\n"
-    if food_entry['description']:
-        msg += f"Details: {food_entry['description']}\n"
-    if food_entry['food_image_path']:
-        msg += "Image uploaded."
-        
-    msg += "\n\nAdd more meals with `/meal [description]` or generate your report with /submit."
-    await query.edit_message_text(msg)
 
-async def log_exercise_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Handles logging an exercise via /exercise command."""
-    user_id = update.effective_user.id
-    if not db.user_exists(user_id):
-        await update.message.reply_text("Please register first using /start.")
-        return
+async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data.pop("food_meal_type", None)
+    await update.message.reply_text("Food logging cancelled.", reply_markup=ReplyKeyboardRemove())
+    return ConversationHandler.END
 
-    args = context.args
-    if not args or len(args) < 2:
-        await update.message.reply_text(
-            "Please specify exercise details.\n"
-            "Usage: `/exercise [type] [duration_mins] [optional_details]`\n"
-            "Example: `/exercise Gym 45 Weight lifting - chest and triceps`"
-        )
-        return
 
-    ex_type = args[0]
-    try:
-        duration = int(args[1])
-        details = " ".join(args[2:]) if len(args) > 2 else "Logged via Telegram"
-    except ValueError:
-        await update.message.reply_text("Please enter a valid number for duration in minutes.")
-        return
-
-    ensure_daily_log_initialized(user_id, context)
-    
-    # Add exercise entry
-    exercise_entry = {
-        'exercise_type': ex_type,
-        'details': details,
-        'duration_minutes': duration
-    }
-    context.user_data['daily_log']['exercise_entries'].append(exercise_entry)
-    
-    await update.message.reply_text(
-        f"Logged exercise successfully! 🏋️\n"
-        f"- Type: {ex_type}\n"
-        f"- Duration: {duration} mins\n"
-        f"- Details: {details}\n\n"
-        f"You can add more or submit the daily log with /submit."
+def build_conversation_handler() -> ConversationHandler:
+    return ConversationHandler(
+        entry_points=[CommandHandler("logfood", logfood_start)],
+        states={
+            MEAL_TYPE: [MessageHandler(filters.TEXT & ~filters.COMMAND, meal_type_step)],
+            DESCRIPTION_OR_PHOTO: [MessageHandler(
+                (filters.TEXT | filters.PHOTO) & ~filters.COMMAND, description_or_photo_step
+            )],
+        },
+        fallbacks=[CommandHandler("cancel", cancel)],
     )

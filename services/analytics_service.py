@@ -1,127 +1,149 @@
-import os
-from datetime import datetime, timedelta
-import database as db
-from services import ai_engine
+"""
+Analytics service.
 
-def analyze_user_progress(user_id, days=7):
-    """Aggregates user log statistics over a date range and queries Gemini for a progress review."""
-    user = db.get_user(user_id)
-    if not user:
-        return "User not found."
+v1's "trend" logic (per the original docs) was a first-value-vs-last-value
+diff — noisy for anything with day-to-day variance (sleep, mood, steps),
+and it says nothing about whether a trend is a real pattern or just noise
+in a 7-day window.
 
-    user_profile = dict(user)
-    
-    # Calculate date range
-    end_date = datetime.now().strftime('%Y-%m-%d')
-    start_date = (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d')
-    
-    # Fetch logs
-    logs = db.get_logs_in_range(user_id, start_date, end_date)
+v2 fits a simple linear regression (numpy.polyfit, degree 1) over the time
+series and reports both the slope (direction + magnitude, in real units per
+day) and R² (how much of the variance the trend line actually explains).
+An R² near 0 means "this metric bounced around, don't tell the user it's
+'improving' or 'declining'" — a materially more honest signal than a two-point
+diff, and exactly the kind of distinction a health app should not gloss over.
+"""
+from __future__ import annotations
+
+from datetime import datetime
+
+import numpy as np
+
+
+def _extract_series(logs: list[dict], field: str) -> tuple[list[float], list[float]]:
+    """Returns (day_offsets, values) for logs where `field` is not None,
+    day_offsets normalized to 0..N so regression coefficients are in
+    'per day' units regardless of the actual calendar range."""
+    dated = [(l["log_date"], l.get(field)) for l in logs if l.get(field) is not None]
+    if not dated:
+        return [], []
+    dated.sort(key=lambda x: x[0])
+    base = datetime.strptime(dated[0][0], "%Y-%m-%d")
+    xs = [(datetime.strptime(d, "%Y-%m-%d") - base).days for d, _ in dated]
+    ys = [float(v) for _, v in dated]
+    return xs, ys
+
+
+def compute_trend(logs: list[dict], field: str) -> dict:
+    xs, ys = _extract_series(logs, field)
+    if len(xs) < 3:
+        return {"field": field, "direction": "insufficient_data", "slope_per_day": 0.0,
+                "r_squared": 0.0, "n_points": len(xs)}
+
+    x = np.array(xs, dtype=np.float64)
+    y = np.array(ys, dtype=np.float64)
+    slope, intercept = np.polyfit(x, y, 1)
+
+    y_pred = slope * x + intercept
+    ss_res = np.sum((y - y_pred) ** 2)
+    ss_tot = np.sum((y - np.mean(y)) ** 2)
+    r_squared = 0.0 if ss_tot == 0 else float(1 - ss_res / ss_tot)
+
+    # A trend only "counts" as a real direction if it explains a reasonable
+    # share of the variance; otherwise we call it flat/noisy rather than
+    # overclaiming a pattern from scatter.
+    if r_squared < 0.15:
+        direction = "flat_or_noisy"
+    elif slope > 0:
+        direction = "increasing"
+    else:
+        direction = "decreasing"
+
+    return {
+        "field": field,
+        "direction": direction,
+        "slope_per_day": round(float(slope), 4),
+        "r_squared": round(r_squared, 3),
+        "n_points": len(xs),
+        "mean": round(float(np.mean(y)), 2),
+    }
+
+
+TRACKED_NUMERIC_FIELDS = ["total_sleep_minutes", "steps", "weight_kg", "hydration_level"]
+
+MOOD_SCORE_MAP = {"great": 5, "good": 4, "okay": 3, "low": 2, "bad": 1}
+
+
+def compute_summary(logs: list[dict]) -> dict:
+    """Aggregate averages + trends across a window of logs."""
     if not logs:
-        return f"No logs found in the last {days} days. Please use /log daily to track your metrics!"
+        return {"n_days_logged": 0, "trends": {}, "averages": {}, "wellness_score": None}
 
-    total_logs = len(logs)
-    
-    # Aggregate metrics
-    total_steps = 0
-    total_sleep_mins = 0
-    total_water = 0
-    total_exercise_mins = 0
-    
-    weights = []
-    moods = []
-    stresses = []
-    focus_levels = []
-    
-    for log in logs:
-        details = log['log_details']
-        
-        # steps
-        total_steps += details.get('steps') or 0
-        # sleep
-        total_sleep_mins += details.get('total_sleep_minutes') or 0
-        # water
-        total_water += details.get('hydration_level') or 0
-        # weight
-        if details.get('weight_kg'):
-            weights.append(details['weight_kg'])
-        # mood
-        if details.get('mood'):
-            moods.append(details['mood'])
-        # stress
-        if details.get('stress_level'):
-            stresses.append(details['stress_level'])
-        # focus
-        if details.get('focus_level'):
-            focus_levels.append(details['focus_level'])
-            
-        # exercises
-        for ex in log['exercise_entries']:
-            total_exercise_mins += ex.get('duration_minutes') or 0
-            
-    # Calculate averages
-    avg_steps = int(total_steps / total_logs)
-    avg_sleep_hours = (total_sleep_mins / total_logs) / 60
-    avg_water = total_water / total_logs
-    
-    # Weight changes
-    weight_change_str = "No weight updates logged."
-    if weights:
-        start_w = weights[0]
-        end_w = weights[-1]
-        diff_w = end_w - start_w
-        if diff_w > 0:
-            weight_change_str = f"Increased by {diff_w:.1f} kg (from {start_w:.1f} kg to {end_w:.1f} kg)"
-        elif diff_w < 0:
-            weight_change_str = f"Decreased by {abs(diff_w):.1f} kg (from {start_w:.1f} kg to {end_w:.1f} kg)"
+    trends = {field: compute_trend(logs, field) for field in TRACKED_NUMERIC_FIELDS}
+
+    averages = {}
+    for field in TRACKED_NUMERIC_FIELDS:
+        vals = [l[field] for l in logs if l.get(field) is not None]
+        averages[field] = round(sum(vals) / len(vals), 2) if vals else None
+
+    mood_scores = [MOOD_SCORE_MAP.get((l.get("mood") or "").lower()) for l in logs]
+    mood_scores = [m for m in mood_scores if m is not None]
+    avg_mood = sum(mood_scores) / len(mood_scores) if mood_scores else None
+
+    return {
+        "n_days_logged": len(logs),
+        "trends": trends,
+        "averages": averages,
+        "avg_mood_score": round(avg_mood, 2) if avg_mood is not None else None,
+        "wellness_score": compute_wellness_score(averages, avg_mood),
+    }
+
+
+def compute_wellness_score(averages: dict, avg_mood_score: float | None) -> float | None:
+    """0-100 composite score. Simple weighted normalization — deliberately
+    transparent/explainable (each component's contribution is inspectable)
+    rather than an opaque single ML model, since users/reviewers should be
+    able to see *why* the score is what it is."""
+    components = []
+
+    sleep_min = averages.get("total_sleep_minutes")
+    if sleep_min is not None:
+        # 7-9h (420-540 min) treated as ideal; score tapers off outside that band
+        ideal_low, ideal_high = 420, 540
+        if ideal_low <= sleep_min <= ideal_high:
+            components.append(100.0)
         else:
-            weight_change_str = f"Stable at {end_w:.1f} kg"
-            
-    # Formulate statistics text
-    stats_summary = (
-        f"--- Wellness Statistics over the last {days} days ---\n"
-        f"📝 Days Logged: {total_logs}/{days}\n"
-        f"🏃 Average Daily Steps: {avg_steps} steps\n"
-        f"😴 Average Daily Sleep: {avg_sleep_hours:.1f} hours\n"
-        f"💧 Average Daily Hydration: {avg_water:.1f} Liters\n"
-        f"🏋️ Total Exercise Time: {total_exercise_mins} minutes\n"
-        f"⚖️ Weight Progression: {weight_change_str}\n"
-        f"🧠 Mood Logs: {', '.join(moods[-5:]) if moods else 'None'}\n"
-        f"🧘 Stress Levels: {', '.join(stresses[-5:]) if stresses else 'None'}\n"
-    )
+            distance = min(abs(sleep_min - ideal_low), abs(sleep_min - ideal_high))
+            components.append(max(0.0, 100.0 - distance / 3))
 
-    # Ask Gemini 2.0 Flash to synthesize a progress evaluation
-    model = ai_engine.get_model()
-    
-    prompt = f"""
-    You are a professional clinical wellness advisor. Analyze the following progress metrics of a user and write a high-fidelity wellness evaluation report.
-    
-    User Profile:
-    - Name: {user_profile['name']}
-    - Primary Health Goal: {user_profile['health_goal']}
-    - Food Preference: {user_profile['food_preference']}
-    - Existing Medical Conditions: {user_profile.get('medical_conditions', 'None')}
-    
-    Progress Summary ({days} days):
-    {stats_summary}
-    
-    Write a structured report containing:
-    1. **Overview & Consistency**: How consistent is the user with logging?
-    2. **Metrics Evaluation**: Are sleep, steps, hydration, and exercise aligned with their health goal ({user_profile['health_goal']})?
-    3. **Progress Direction**: Are they improving, regression, or plateauing? Specifically mention weight changes or mental indicators (mood/stress).
-    4. **Recommendations & Tips**: Provide 3 clear, actionable adjustments they should make next week to speed up progress.
-    
-    Format the output using neat Markdown styling suitable for Telegram messages. Keep it professional, encouraging, and clear.
-    """
-    
-    try:
-        response = model.generate_content(prompt)
-        report_text = f"📊 **{days}-Day Wellness Progress Report** 📊\n\n{stats_summary}\n{response.text}"
-        return report_text
-    except Exception as e:
-        print(f"Failed to generate progress report via Gemini: {e}")
-        return (
-            f"📊 **{days}-Day Wellness Progress Report** 📊\n\n"
-            f"{stats_summary}\n"
-            f"❌ Could not generate AI progress review: {e}"
-        )
+    steps = averages.get("steps")
+    if steps is not None:
+        components.append(min(100.0, (steps / 10000) * 100))
+
+    hydration = averages.get("hydration_level")
+    if hydration is not None:
+        components.append(min(100.0, (hydration / 3.0) * 100))  # assume 3L target
+
+    if avg_mood_score is not None:
+        components.append((avg_mood_score / 5.0) * 100)
+
+    if not components:
+        return None
+    return round(sum(components) / len(components), 1)
+
+
+def detect_notable_patterns(logs: list[dict]) -> list[str]:
+    """Human-readable flags for anything worth surfacing in a report or
+    feeding into the memory-consolidation prompt as a hint."""
+    if len(logs) < 3:
+        return []
+    notes = []
+    summary = compute_summary(logs)
+    for field, trend in summary["trends"].items():
+        if trend["direction"] in ("increasing", "decreasing") and trend["r_squared"] >= 0.3:
+            label = field.replace("_", " ")
+            notes.append(
+                f"{label} is {trend['direction']} at ~{abs(trend['slope_per_day']):.2f}/day "
+                f"(R²={trend['r_squared']}, n={trend['n_points']})"
+            )
+    return notes

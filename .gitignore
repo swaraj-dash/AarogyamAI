@@ -1,17 +1,16 @@
-# Virtual Environment
-venv/
-.venv/
-
-# Python cache
 __pycache__/
 *.pyc
-
-# Streamlit Secrets - VERY IMPORTANT
-.streamlit/secrets.toml
-
-# Generated data and user uploads
-generated_reports/
-uploads/
-
-# Database file
-aarogyam.db
+.env
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+aarogyam.db.*
+generated_reports/*.pdf
+uploads/**/*.jpg
+uploads/**/*.png
+.streamlit/
+.pytest_cache/
+*.egg-info/
+venv/
+.venv/

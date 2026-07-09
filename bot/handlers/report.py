@@ -1,113 +1,82 @@
-import os
-from datetime import datetime
+"""
+/report — generates and sends a PDF via report_service (analytics +
+semantic memory + LLM narrative, see services/report_service.py).
+
+/analytics — a quick in-chat text summary for people who don't need the
+full PDF right now.
+"""
+from __future__ import annotations
+
+from datetime import date, timedelta
+
 from telegram import Update
-from telegram.ext import ContextTypes
+from telegram.ext import CommandHandler, ContextTypes
+
 import database as db
-from services import ai_engine, rag_engine, report_service
+from services import analytics_service, report_service
+from services.memory_service import EpisodicMemory
 
-async def submit_daily_log(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Submits the daily log, triggers AI analysis, generates PDF, and sends it to the user."""
+
+def _parse_days_arg(args: list[str], default_days: int = 7) -> int:
+    if args:
+        try:
+            return max(1, int(args[0]))
+        except ValueError:
+            pass
+    return default_days
+
+
+async def report_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     if not db.user_exists(user_id):
-        await update.message.reply_text("Please register first using /start.")
+        await update.message.reply_text("Please run /start first to set up your profile.")
         return
 
-    daily_log = context.user_data.get('daily_log')
-    if not daily_log or (not daily_log.get('food_entries') and not daily_log.get('exercise_entries')):
-        # Check if they have metrics logged but no food/exercise
-        if not daily_log:
-            await update.message.reply_text(
-                "You haven't logged anything today!\n"
-                "Please run /log to record metrics or /meal to add a meal first."
-            )
-            return
+    days = _parse_days_arg(context.args, default_days=7)
+    end_date = date.today()
+    start_date = end_date - timedelta(days=days)
 
-    await update.message.reply_text(
-        "🔄 Submitting your daily log and triggering AI analysis...\n"
-        "This may take up to a minute as we analyze food images and compare selfies. Please wait."
-    )
-
+    await update.message.reply_text(f"Generating your {days}-day report...")
     try:
-        user_profile = dict(db.get_user(user_id))
-        
-        # 1. Save log to database
-        # Convert daily_log to match add_daily_log expected structure
-        log_id = db.add_daily_log(daily_log)
-        full_log_data = db.get_full_daily_log(log_id)
-        
-        # 2. Get previous day images
-        prev_day_images = db.get_previous_day_image_paths(user_id, daily_log['log_date'])
-        
-        # 3. Generate analysis
-        full_analysis = ai_engine.generate_comprehensive_daily_analysis(
-            user_profile, full_log_data, prev_day_images
-        )
-        
-        # 4. Get recommendations
-        recommendations = "Could not generate recommendations."
-        if "error" not in full_analysis:
-            lacking_nutrient = full_analysis.get("nutrition_analysis", {}).get("final_summary", {}).get("lacking_nutrient", "")
-            recommendations = rag_engine.get_rag_recommendations(user_profile, lacking_nutrient)
-            
-        # 5. Generate PDF report
-        pdf_path = report_service.generate_daily_report(
-            user_profile, full_log_data, full_analysis, recommendations
-        )
-        
-        if pdf_path and os.path.exists(pdf_path):
-            # Send PDF to user
-            with open(pdf_path, 'rb') as pdf_file:
-                await update.message.reply_document(
-                    document=pdf_file,
-                    filename=os.path.basename(pdf_path),
-                    caption=f"🎉 Here is your Daily Wellness Report for {daily_log['log_date']}!"
-                )
-            # Clear log session
-            context.user_data.pop('daily_log', None)
-        else:
-            await update.message.reply_text(
-                "❌ Failed to generate the PDF report, but your log data has been saved to the database."
-            )
-            
+        result = report_service.generate_report(user_id, start_date.isoformat(), end_date.isoformat())
     except Exception as e:
-        await update.message.reply_text(f"❌ An error occurred during submission: {e}")
-        print(f"Error in submit_daily_log: {e}")
+        await update.message.reply_text(f"Couldn't generate the report: {e}")
+        return
 
-async def get_latest_report(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Sends the user's latest generated PDF report."""
+    with open(result["filepath"], "rb") as f:
+        await update.message.reply_document(document=f, filename="AarogyamAI_Report.pdf")
+
+
+async def analytics_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     if not db.user_exists(user_id):
-        await update.message.reply_text("Please register first using /start.")
+        await update.message.reply_text("Please run /start first to set up your profile.")
         return
 
-    # Check for active logs that need to be submitted first
-    if 'daily_log' in context.user_data and context.user_data['daily_log']:
-        await update.message.reply_text(
-            "You have unsubmitted logs! Running /submit to finalize and generate your report..."
-        )
-        await submit_daily_log(update, context)
+    days = _parse_days_arg(context.args, default_days=14)
+    logs = EpisodicMemory.get_recent_logs(user_id, days)
+    summary = analytics_service.compute_summary(logs)
+    patterns = analytics_service.detect_notable_patterns(logs)
+
+    if summary["n_days_logged"] == 0:
+        await update.message.reply_text("No logs found in that window yet — try /log first.")
         return
 
-    # Look for files in generated_reports
-    report_dir = "generated_reports"
-    if not os.path.exists(report_dir):
-        await update.message.reply_text("You haven't generated any reports yet. Use /log to start.")
-        return
+    lines = [f"Last {days} days ({summary['n_days_logged']} days logged):"]
+    if summary.get("wellness_score") is not None:
+        lines.append(f"Wellness score: {summary['wellness_score']}/100")
+    for field, val in summary["averages"].items():
+        if val is not None:
+            lines.append(f"  avg {field.replace('_', ' ')}: {val}")
+    if patterns:
+        lines.append("\nNotable patterns:")
+        lines.extend(f"  - {p}" for p in patterns)
 
-    reports = [f for f in os.listdir(report_dir) if f.startswith(f"report_{user_id}_") and f.endswith(".pdf")]
-    if not reports:
-        await update.message.reply_text(
-            "No wellness reports found. Submit your daily log using /log and /submit to generate one!"
-        )
-        return
+    await update.message.reply_text("\n".join(lines))
 
-    # Get the latest report by name (contains date sorting)
-    latest_report = sorted(reports, reverse=True)[0]
-    file_path = os.path.join(report_dir, latest_report)
-    
-    with open(file_path, 'rb') as f:
-        await update.message.reply_document(
-            document=f,
-            filename=latest_report,
-            caption="Here is your latest generated Daily Wellness Report! 📄"
-        )
+
+def build_handlers() -> list:
+    return [
+        CommandHandler("report", report_command),
+        CommandHandler("analytics", analytics_command),
+    ]

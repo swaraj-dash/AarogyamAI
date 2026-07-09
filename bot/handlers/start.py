@@ -1,203 +1,143 @@
-import json
-from telegram import Update, ReplyKeyboardMarkup, ReplyKeyboardRemove
+"""
+/start onboarding conversation.
+
+Collects the profile fields needed for personalization (health goal, diet,
+state/city for RAG regional matching, medical context) and creates the
+user row. Kept as a straightforward linear ConversationHandler — the same
+approach as v1, since this part of v1 wasn't actually broken.
+"""
+from __future__ import annotations
+
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
 from telegram.ext import (
-    ContextTypes,
-    ConversationHandler,
-    CommandHandler,
-    MessageHandler,
-    filters,
+    CommandHandler, ContextTypes, ConversationHandler, MessageHandler, filters,
 )
+
 import database as db
 
-# Conversation states
-NAME, DOB, GENDER, HEIGHT, WEIGHT, STATE, CITY, FOOD, GOAL = range(9)
+(NAME, DOB, HEIGHT, GENDER, STATE, CITY, FOOD_PREF, HEALTH_GOAL,
+ EXERCISE_PREF, MEDICAL, DONE) = range(11)
+
+GENDER_KEYBOARD = ReplyKeyboardMarkup([["Male", "Female", "Other"]], one_time_keyboard=True, resize_keyboard=True)
+FOOD_PREF_KEYBOARD = ReplyKeyboardMarkup(
+    [["Vegetarian", "Non-vegetarian", "Vegan"]], one_time_keyboard=True, resize_keyboard=True
+)
+
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Starts the conversation and asks for the user's name."""
     user_id = update.effective_user.id
-    
     if db.user_exists(user_id):
-        user = db.get_user(user_id)
         await update.message.reply_text(
-            f"Welcome back to AarogyamAI, {user['name']}! 🌱\n\n"
-            "Here's what you can do:\n"
-            "📝 /log - Log your health metrics & food for today\n"
-            "👤 /profile - View and edit your health profile\n"
-            "🏋️ /workout - Get today's custom fitness routine\n"
-            "📄 /report - Generate your daily PDF wellness report\n"
-            "🌿 /alternative - Find eco-friendly alternatives for items\n"
-            "💬 /help - Show available commands"
+            "Welcome back! Use /chat to talk to me, /log to record today, or /report for a summary."
         )
         return ConversationHandler.END
 
+    context.user_data["onboarding"] = {}
     await update.message.reply_text(
-        "Welcome to AarogyamAI! 🌱\n"
-        "I will be your personal health & wellness companion.\n"
-        "Let's create your wellness profile. What is your Full Name?"
+        "Welcome to AarogyamAI! Let's set up your profile.\nWhat's your name?",
+        reply_markup=ReplyKeyboardRemove(),
     )
     return NAME
 
-async def get_name(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores the name and asks for the Date of Birth."""
-    context.user_data['name'] = update.message.text
-    await update.message.reply_text(
-        f"Nice to meet you, {update.message.text}!\n"
-        "What is your Date of Birth? (Please use YYYY-MM-DD format, e.g., 1995-08-15)"
-    )
+
+async def name_step(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["onboarding"]["name"] = update.message.text.strip()
+    await update.message.reply_text("Date of birth? (YYYY-MM-DD)")
     return DOB
 
-async def get_dob(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores DOB and asks for Gender."""
-    dob_text = update.message.text.strip()
-    # Simple check for format
-    try:
-        from datetime import datetime
-        datetime.strptime(dob_text, "%Y-%m-%d")
-        context.user_data['dob'] = dob_text
-    except ValueError:
-        await update.message.reply_text("Invalid date format. Please send DOB in YYYY-MM-DD format.")
-        return DOB
 
-    reply_keyboard = [["Male", "Female"], ["Other", "Prefer not to say"]]
-    await update.message.reply_text(
-        "What is your Gender?",
-        reply_markup=ReplyKeyboardMarkup(
-            reply_keyboard, one_time_keyboard=True, resize_keyboard=True
-        ),
-    )
-    return GENDER
-
-async def get_gender(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores Gender and asks for Height."""
-    context.user_data['gender'] = update.message.text
-    await update.message.reply_text(
-        "What is your height in cm? (e.g. 175)",
-        reply_markup=ReplyKeyboardRemove()
-    )
+async def dob_step(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["onboarding"]["dob"] = update.message.text.strip()
+    await update.message.reply_text("Height in cm?")
     return HEIGHT
 
-async def get_height(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores Height and asks for Weight."""
+
+async def height_step(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     try:
-        height = float(update.message.text.strip())
-        context.user_data['height_cm'] = height
+        context.user_data["onboarding"]["height_cm"] = float(update.message.text.strip())
     except ValueError:
-        await update.message.reply_text("Please enter a valid height number in cm.")
+        await update.message.reply_text("Please send height as a number, e.g. 170")
         return HEIGHT
+    await update.message.reply_text("Gender?", reply_markup=GENDER_KEYBOARD)
+    return GENDER
 
-    await update.message.reply_text("What is your current weight in kg? (e.g. 70.5)")
-    return WEIGHT
 
-async def get_weight(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores Weight and asks for Location State."""
-    try:
-        weight = float(update.message.text.strip())
-        context.user_data['current_weight'] = weight
-    except ValueError:
-        await update.message.reply_text("Please enter a valid weight number in kg.")
-        return WEIGHT
-
-    await update.message.reply_text("Which State do you live in? (e.g., Maharashtra)")
+async def gender_step(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["onboarding"]["gender"] = update.message.text.strip()
+    await update.message.reply_text("Which state do you live in?", reply_markup=ReplyKeyboardRemove())
     return STATE
 
-async def get_state(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores State and asks for City."""
-    context.user_data['location_state'] = update.message.text.strip()
-    await update.message.reply_text("Which City do you live in? (e.g., Mumbai)")
+
+async def state_step(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["onboarding"]["location_state"] = update.message.text.strip()
+    await update.message.reply_text("Which city?")
     return CITY
 
-async def get_city(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores City and asks for Food Preference."""
-    context.user_data['city'] = update.message.text.strip()
-    
-    reply_keyboard = [["Vegetarian", "Vegetarian + Non-Veg"]]
-    await update.message.reply_text(
-        "What is your Food Preference?",
-        reply_markup=ReplyKeyboardMarkup(
-            reply_keyboard, one_time_keyboard=True, resize_keyboard=True
-        ),
-    )
-    return FOOD
 
-async def get_food(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores Food Preference and asks for Health Goal."""
-    context.user_data['food_preference'] = update.message.text
-    
-    reply_keyboard = [
-        ["Weight Loss", "Weight Gain"],
-        ["Maintain Weight", "Improve Fitness"],
-        ["Manage Stress"]
-    ]
-    await update.message.reply_text(
-        "What is your Primary Health Goal?",
-        reply_markup=ReplyKeyboardMarkup(
-            reply_keyboard, one_time_keyboard=True, resize_keyboard=True
-        ),
-    )
-    return GOAL
+async def city_step(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["onboarding"]["city"] = update.message.text.strip()
+    await update.message.reply_text("Dietary preference?", reply_markup=FOOD_PREF_KEYBOARD)
+    return FOOD_PREF
 
-async def get_goal(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores Health Goal, saves user profile, and ends conversation."""
-    context.user_data['health_goal'] = update.message.text
-    user_id = update.effective_user.id
-    
-    # Save user to DB
-    user_data = {
-        'name': context.user_data['name'],
-        'dob': context.user_data['dob'],
-        'height_cm': context.user_data['height_cm'],
-        'gender': context.user_data['gender'],
-        'location_state': context.user_data['location_state'],
-        'city': context.user_data['city'],
-        'food_preference': context.user_data['food_preference'],
-        'health_goal': context.user_data['health_goal'],
-        'preferred_exercise': [], # Optional list starts empty
-        'medical_conditions': 'NA',
-        'medications': 'NA',
-        'allergies': 'NA',
-        'surgical_history': 'NA',
-        'family_history': 'NA'
-    }
-    
-    db.add_user(user_data, user_id=user_id)
-    
+
+async def food_pref_step(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["onboarding"]["food_preference"] = update.message.text.strip().lower()
     await update.message.reply_text(
-        "🎉 Wellness profile created successfully!\n\n"
-        "You can now track your metrics daily. Try these commands:\n"
-        "📝 /log - Start logging today's activities & food\n"
-        "🏋️ /workout - Generate a custom workout plan\n"
-        "📄 /report - Get your daily PDF health insights\n"
-        "👤 /profile - View your profile details",
-        reply_markup=ReplyKeyboardRemove()
+        "What's your main health goal? (e.g. lose weight, build strength, improve energy)",
+        reply_markup=ReplyKeyboardRemove(),
     )
-    
-    # Clean up user_data state
-    for k in ['name', 'dob', 'gender', 'height_cm', 'current_weight', 'location_state', 'city', 'food_preference', 'health_goal']:
-        context.user_data.pop(k, None)
-        
+    return HEALTH_GOAL
+
+
+async def health_goal_step(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["onboarding"]["health_goal"] = update.message.text.strip()
+    await update.message.reply_text("Preferred type of exercise? (or 'none')")
+    return EXERCISE_PREF
+
+
+async def exercise_pref_step(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["onboarding"]["preferred_exercise"] = update.message.text.strip()
+    await update.message.reply_text(
+        "Any medical conditions, medications, or allergies I should know about? (or 'none')"
+    )
+    return MEDICAL
+
+
+async def medical_step(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["onboarding"]["medical_conditions"] = update.message.text.strip()
+    onboarding = context.user_data["onboarding"]
+
+    user_id = db.add_user(onboarding, user_id=update.effective_user.id)
+    await update.message.reply_text(
+        f"You're all set, {onboarding['name']}! Your AarogyamAI ID is {user_id} "
+        "(use this to log in on the web dashboard too).\n\n"
+        "Try /log to record today, /chat to talk to me, or /report for a summary."
+    )
+    context.user_data.pop("onboarding", None)
     return ConversationHandler.END
+
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Cancels and ends the conversation."""
-    await update.message.reply_text(
-        "Profile onboarding cancelled. You can register anytime using /start.",
-        reply_markup=ReplyKeyboardRemove()
-    )
+    context.user_data.pop("onboarding", None)
+    await update.message.reply_text("Setup cancelled. Send /start to try again.",
+                                     reply_markup=ReplyKeyboardRemove())
     return ConversationHandler.END
 
-def get_start_handler():
+
+def build_conversation_handler() -> ConversationHandler:
     return ConversationHandler(
         entry_points=[CommandHandler("start", start)],
         states={
-            NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_name)],
-            DOB: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_dob)],
-            GENDER: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_gender)],
-            HEIGHT: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_height)],
-            WEIGHT: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_weight)],
-            STATE: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_state)],
-            CITY: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_city)],
-            FOOD: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_food)],
-            GOAL: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_goal)],
+            NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, name_step)],
+            DOB: [MessageHandler(filters.TEXT & ~filters.COMMAND, dob_step)],
+            HEIGHT: [MessageHandler(filters.TEXT & ~filters.COMMAND, height_step)],
+            GENDER: [MessageHandler(filters.TEXT & ~filters.COMMAND, gender_step)],
+            STATE: [MessageHandler(filters.TEXT & ~filters.COMMAND, state_step)],
+            CITY: [MessageHandler(filters.TEXT & ~filters.COMMAND, city_step)],
+            FOOD_PREF: [MessageHandler(filters.TEXT & ~filters.COMMAND, food_pref_step)],
+            HEALTH_GOAL: [MessageHandler(filters.TEXT & ~filters.COMMAND, health_goal_step)],
+            EXERCISE_PREF: [MessageHandler(filters.TEXT & ~filters.COMMAND, exercise_pref_step)],
+            MEDICAL: [MessageHandler(filters.TEXT & ~filters.COMMAND, medical_step)],
         },
         fallbacks=[CommandHandler("cancel", cancel)],
     )
